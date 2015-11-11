@@ -10,26 +10,35 @@ using System.Data.Common;
 
 namespace GodtSkoddFAQ_mappe3_s198611.Models
 {
-    /*public class Kunde
+    public class Categories
     {
-        [Key]
-        public int id { get; set; }
-        public string fornavn { get; set; }
-        public string etternavn { get; set; }
-        public string adresse { get; set; }
-        public string postnr { get; set; }
+        public int ID { get; set; }
+        public String Name { get; set; }
 
-        public virtual Poststed poststed { get; set; }
+        public virtual List<FAQs> Faqs { get; set; }
     }
 
-    public class Poststed
+    public class FAQs
     {
-        [Key]
-        public string postnr { get; set; }
-        public string poststed { get; set; }
+        public int ID { get; set; }
+        public String Question { get; set; }
+        public String Answer { get; set; }
+        public int CategoryId { get; set; } // foreign key from Category
 
-        public virtual List<Kunde> kunder { get; set; }
-    }*/
+        public virtual Categories Category { get; set; }
+    }
+
+    public class Requests
+    {
+        public int ID { get; set; }
+        public String SenderFirstName { get; set; }
+        public String SenderLastName { get; set; }
+        public String SenderEmail { get; set; }
+        public String Subject { get; set; }
+        public String Question { get; set; }
+        public DateTime Date { get; set; }
+        public bool Answered { get; set; }
+    }
 
     public class FAQContext : DbContext
     {
@@ -39,8 +48,9 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
             Database.CreateIfNotExists();
         }
         
-        //public DbSet<Kunde> Kunder { get; set; }
-        //public DbSet<Poststed> Poststeder { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<FAQs> FAQs { get; set; }
+        public DbSet<Requests> Requests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
