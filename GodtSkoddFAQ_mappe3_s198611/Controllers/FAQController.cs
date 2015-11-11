@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using System.Net.Http.Formatting;
 using System.Data.Common;
 using GodtSkoddFAQ_mappe3_s198611.Models;
+using System.Text;
 
 namespace GodtSkoddFAQ_mappe3_s198611.Controllers
 {
@@ -15,6 +16,28 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
     {
         FAQDb faqDb = new FAQDb();
         
+        // GET api/FAQ
+        public HttpResponseMessage Get()
+        {
+            List<FAQ> allFAQs = faqDb.GetAllFAQs();
+
+            var Json = new JavaScriptSerializer();
+            string JsonString = Json.Serialize(allFAQs);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
+                StatusCode = HttpStatusCode.OK
+            };
+
+            // alternativ til return-koden over - for å forklare dette bedre :
+
+            //var respons = new HttpResponseMessage();
+            //respons.Content = new StringContent(JsonString, Encoding.UTF8, "application/json");
+            //respons.StatusCode = HttpStatusCode.OK;
+            //return respons;
+        }
+
         /*
         // GET api/Kunde
         public HttpResponseMessage Get()
