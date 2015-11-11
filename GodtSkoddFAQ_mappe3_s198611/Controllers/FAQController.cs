@@ -38,36 +38,13 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             //return respons;
         }
 
-        /*
-        // GET api/Kunde
-        public HttpResponseMessage Get()
-        {
-            List<kunde> alleKunder = kundeDb.hentAlleKunder();
-
-            var Json = new JavaScriptSerializer();
-            string JsonString = Json.Serialize(alleKunder);
-
-            return new HttpResponseMessage()
-            {
-                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
-                StatusCode = HttpStatusCode.OK
-            };
-
-            // alternativ til return-koden over - for å forklare dette bedre :
-            
-            //var respons = new HttpResponseMessage();
-            //respons.Content = new StringContent(JsonString, Encoding.UTF8, "application/json");
-            //respons.StatusCode = HttpStatusCode.OK;
-            //return respons;
-        }
-
-        // GET api/Kunde/5
+        // GET api/FAQ/5
         public HttpResponseMessage Get(int id)
         {
-            kunde enKunde = kundeDb.hentEnKunde(id);
+            FAQ oneFAQ = faqDb.GetFAQ(id);
 
             var Json = new JavaScriptSerializer();
-            string JsonString = Json.Serialize(enKunde);
+            string JsonString = Json.Serialize(oneFAQ);
 
             return new HttpResponseMessage()
             {
@@ -76,34 +53,13 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             };
         }
 
-        // POST api/Kunde
-        public HttpResponseMessage Post(kunde innKunde)
+        // POST api/FAQ
+        public HttpResponseMessage Post(FAQ faq)
         {
             if (ModelState.IsValid)
             {
-                bool OK = kundeDb.lagreEnKunde(innKunde);
-                if (OK)
-                {
-                    return new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.OK
-                    };
+                bool OK = faqDb.CreateFAQ(faq);
 
-                }
-            }
-            return new HttpResponseMessage()
-            {
-                StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke sette inn kunden i DB")
-            };
-        }
-
-        // PUT api/Kunde/5
-        public HttpResponseMessage Put(int id, [FromBody]kunde innKunde)
-        {
-            if (ModelState.IsValid)
-            {
-                bool OK = kundeDb.endreEnKunde(id, innKunde);
                 if (OK)
                 {
                     return new HttpResponseMessage()
@@ -112,30 +68,55 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                     };
                 }
             }
+
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke endre kunden i DB")
+                Content = new StringContent("Kunne ikke sette inn dette spørsmålet i databasen")
             };
-
         }
 
-        // DELETE api/Kunde/5
+        // PUT api/FAQ/5
+        public HttpResponseMessage Put(int id, [FromBody]FAQ faq)
+        {
+            if (ModelState.IsValid)
+            {
+                bool OK = faqDb.UpdateFAQ(id, faq);
+
+                if (OK)
+                {
+                    return new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+            }
+
+            return new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.NotFound,
+                Content = new StringContent("Kunne ikke endre spørsmålet i databasen")
+            };
+        }
+
+        // DELETE api/FAQ/5
         public HttpResponseMessage Delete(int id)
         {
-            bool OK = kundeDb.slettEnKunde(id);
+            bool OK = faqDb.DeleteFAQ(id);
+
             if (!OK)
             {
                 return new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Content = new StringContent("Kunne ikke slette kunden i DB")
+                    Content = new StringContent("Kunne ikke slette spørsmålet fra databasen")
                 };
             }
+
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.OK
             };
-        }*/
+        }
     }
 }
