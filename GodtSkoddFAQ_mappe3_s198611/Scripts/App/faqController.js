@@ -1,6 +1,19 @@
 ﻿var App = angular.module("App", []);
 
 App.controller("faqController", function ($scope, $http) {
+
+    var urlFAQ = '/api/FAQ';
+    var urlRequest = '/api/Request';
+    var urlCategory = '/api/Category';
+
+    $http.get(urlFAQ).
+        success(function (allFAQs) {
+            $scope.faq = true;
+        }).
+        error(function (data, status) {
+            $scope.faq = false;
+        });
+
     /*
     var url = '/api/Kunde/';
     $scope.sletteFeil = false;
@@ -38,6 +51,7 @@ App.controller("faqController", function ($scope, $http) {
               console.log(status + data);
           });
     };
+
     $scope.slettKunde = function () {
         $http.delete(url + $scope.sletteId).
         success(function (feil) {
