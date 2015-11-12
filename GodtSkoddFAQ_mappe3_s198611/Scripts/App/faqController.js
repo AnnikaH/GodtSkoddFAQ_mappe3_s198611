@@ -9,61 +9,121 @@ App.controller("faqController", function ($scope, $http) {
     // All ng-show: loading, faq, sendRequest, allRequests, newCategory, newFaq
 
     // Code for what should happen/show on front page (FAQ):
-    $scope.sendRequest = false;
-    $scope.allRequests = false;
-    $scope.newCategory = false;
-    $scope.newFaq = false;
-    $scope.loading = true;
-    $scope.faq = true;
+    startPage();
 
+    // startPage()
+    function startPage() {
+        $scope.sendRequestPage = false;
+        $scope.allFaqsPage = false;
+        $scope.allRequestsPage = false;
+        $scope.newCategoryPage = false;
+        $scope.newFaqPage = false;
+
+        $scope.loading = true;
+        $scope.faqPage = true;
+
+        // get all FAQs
+        $http.get(urlFAQ).
+        success(function (allFAQs) {
+            $scope.faqs = allFAQs;
+            $scope.loading = false;
+        }).
+        error(function (data, status) {
+            
+        });
+    }
+
+    // toggle FAQ
+    $scope.toggleAnswer = function (id) {
+        $('#faq-' + id).toggle();
+    }
+
+    // goToStartPage()
     $scope.goToStartPage = function () {
-        $scope.sendRequest = false;
-        $scope.allRequests = false;
-        $scope.newCategory = false;
-        $scope.newFaq = false;
-
-        $scope.loading = true;
-        $scope.faq = true;
+        startPage();
     }
 
+    // goToSendRequest()
     $scope.goToSendRequest = function () {
-        $scope.faq = false;
-        $scope.allRequests = false;
-        $scope.newCategory = false;
-        $scope.newFaq = false;
+        $scope.faqPage = false;
+        $scope.allFaqsPage = false;
+        $scope.allRequestsPage = false;
+        $scope.newCategoryPage = false;
+        $scope.newFaqPage = false;
 
         $scope.loading = true;
-        $scope.sendRequest = true;
+        $scope.sendRequestPage = true;
     }
 
+    // goToAllFAQs()
+    $scope.goToAllFAQs = function () {
+        $scope.faqPage = false;
+        $scope.sendRequestPage = false;
+        $scope.allRequestsPage = false;
+        $scope.newCategoryPage = false;
+        $scope.newFaqPage = false;
+
+        $scope.loading = true;
+        $scope.allFaqsPage = true;
+    }
+
+    // goToAllRequests()
     $scope.goToAllRequests = function () {
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.newCategory = false;
-        $scope.newFaq = false;
+        $scope.faqPage = false;
+        $scope.sendRequestPage = false;
+        $scope.allFaqsPage = false;
+        $scope.newCategoryPage = false;
+        $scope.newFaqPage = false;
 
         $scope.loading = true;
-        $scope.allRequests = true;
+        $scope.allRequestsPage = true;
     }
 
+    // goToNewCategory()
     $scope.goToNewCategory = function () {
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.allRequests = false;
-        $scope.newFaq = false;
+        $scope.faqPage = false;
+        $scope.sendRequestPage = false;
+        $scope.allFaqsPage = false;
+        $scope.allRequestsPage = false;
+        $scope.newFaqPage = false;
 
         $scope.loading = true;
-        $scope.newCategory = true;
+        $scope.newCategoryPage = true;
     }
 
+    // goToNewFAQ()
     $scope.goToNewFAQ = function () {
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.allRequests = false;
-        $scope.newCategory = false;
+        $scope.faqPage = false;
+        $scope.sendRequestPage = false;
+        $scope.allFaqsPage = false;
+        $scope.allRequestsPage = false;
+        $scope.newCategoryPage = false;
 
         $scope.loading = true;
-        $scope.newFaq = true;
+        $scope.newFaqPage = true;
+
+        // get all categories
+        $http.get(urlCategory).
+        success(function (allCategories) {
+            $scope.categories = allCategories;
+            $scope.loading = false;
+
+            $scope.updateFAQButton = false;
+            $scope.registerFAQButton = true;
+        }).
+        error(function (data, status) {
+
+        });
+    }
+
+    // updateFAQ()
+    $scope.updateFAQ = function () {
+        // i skjemaNyFAQ
+    }
+
+    // registerFAQ()
+    $scope.registerFAQ = function () {
+        // i skjemaNyFAQ
     }
 
     /*$http.get(urlFAQ).

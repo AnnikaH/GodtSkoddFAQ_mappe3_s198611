@@ -24,17 +24,17 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
 
         /*[Display(Name = "Spørsmål")]
         [Required(ErrorMessage = "Spørsmål må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s0-9\-\.]{1,40}", ErrorMessage = "Spørsmålet inneholder ugyldige tegn")]*/
+        [RegularExpression(@"[a-zøæåA-ZØÆÅ. \-]{2,40}", ErrorMessage = "Spørsmålet inneholder ugyldige tegn")]*/
         public String question { get; set; }
 
         /*[Display(Name = "Svar")]
         [Required(ErrorMessage = "Svar må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s0-9\-\.]{1,80}", ErrorMessage = "Svaret inneholder ugyldige tegn")]*/
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s0-9\-\.]{2,80}", ErrorMessage = "Svaret inneholder ugyldige tegn")]*/
         public String answer { get; set; }
 
         /*[Display(Name = "Kategori Id")]
         [Required(ErrorMessage = "Kategori Id må oppgis")]
-        [RegularExpression(@"[0-9]{1,3}", ErrorMessage = "Kategori Id må være et tall")]*/
+        [RegularExpression(@"[0-9]{1,2}", ErrorMessage = "Kategori Id må være et tall")]*/
         public int categoryId { get; set; }
     }
 

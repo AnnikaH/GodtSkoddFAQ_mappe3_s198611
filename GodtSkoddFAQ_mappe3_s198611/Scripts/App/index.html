@@ -34,6 +34,9 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+                            <a href="" ng-click="goToAllFAQs()">Alle FAQs</a>
+                        </li>
+                        <li>
                             <a href="" ng-click="goToAllRequests()">Alle forespørsler</a>
                         </li>
                         <li>
@@ -55,39 +58,96 @@
                     <h4>Laster data. Vennligst vent ...</h4>
                 </div>
 
-                <!-- FAQ (Start page) -->
-                <div ng-show="faq">
-                    <div>
-                        FAQ
-                    </div>
+                <!-- FAQ page (start page) -->
+                <div ng-show="faqPage">
+                    <h2 class="text-center">Frequently Asked Questions - Godt Skodd</h2>
+
+                    <table class="table">
+                        <tbody ng-repeat="faq in faqs">
+                            <tr>
+                                <td ng-click="toggleAnswer(faq.id)">{{faq.question}}</td>
+                            </tr>
+                            <tr>
+                                <td id="{{ 'faq-' + faq.id }}">{{faq.answer}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <!-- Send request -->
-                <div ng-show="sendRequest">
+                <!-- Send request page -->
+                <div ng-show="sendRequestPage">
                     <div>
                         SEND REQUEST
                     </div>
                 </div>
 
-                <!-- All requests -->
-                <div ng-show="allRequests">
+                <!-- All FAQs page -->
+                <div ng-show="allFaqsPage">
+                    <div>
+                        ALL FAQS
+                    </div>
+                </div>
+
+                <!-- All requests page -->
+                <div ng-show="allRequestsPage">
                     <div>
                         ALL REQUESTS
                     </div>
                 </div>
 
-                <!-- New category -->
-                <div ng-show="newCategory">
+                <!-- New category page -->
+                <div ng-show="newCategoryPage">
                     <div>
                         NEW CATEGORY
                     </div>
                 </div>
+                
+                <!-- New FAQ page -->
+                <div ng-show="newFaqPage">
+                    <h2 class="text-center">Legg til nytt FAQ</h2>
 
-                <!-- New FAQ -->
-                <div ng-show="newFaq">
-                    <div>
-                        NEW FAQ
-                    </div>
+                    <!-- Show all categories: -->
+                    <h4>Kategorier</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Kategori ID</th>
+                                <th>Navn</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="category in categories">
+                            <tr>
+                                <td>{{category.id}}</td>
+                                <td>{{category.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Add new FAQ: -->
+                    <h4>Nytt FAQ</h4>
+
+                    <form name="skjemaNyFAQ">
+                        <div class="form-group">
+                            <label>Kategori ID:</label>
+                            <input class="form-control" name="kategoriId" ng-model="kategoriId" ng-required="true" ng-pattern="/^[0-9]{1,2}$/" />
+                            <p class="label label-info" ng-show="skjemaNyFAQ.kategoriId.$invalid && skjemaNyFAQ.kategoriId.$dirty">Skriv inn en lovlig kategori ID</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Spørsmål:</label>
+                            <input class="form-control" name="sporsmaal" ng-model="sporsmaal" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,40}$/" />
+                            <p class="label label-info" ng-show="skjemaNyFAQ.sporsmaal.$invalid && skjemaNyFAQ.sporsmaal.$dirty">Skriv inn et lovlig spørsmål</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Svar</label>
+                            <input class="form-control" name="svar" ng-model="svar" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ.0-9. \-]{2,80}$/" />
+                            <p class="label label-info" ng-show="skjemaNyFAQ.svar.$invalid && skjemaNyFAQ.svar.$dirty">Skriv inn et lovlig svar</p>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" ng-click="updateFAQ()" ng-disabled="skjemaNyFAQ.$invalid" ng-show="updateFAQButton">Endre</button>
+                            <button class="btn btn-primary" ng-click="registerFAQ()" ng-disabled="skjemaNyFAQ.$invalid" ng-show="registerFAQButton">Registrer</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
 
