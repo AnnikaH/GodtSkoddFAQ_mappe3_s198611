@@ -4,13 +4,49 @@ using System.Linq;
 using System.Web;
 using System.Data.Common;
 using GodtSkoddFAQ_mappe3_s198611.Models;
+using System.IO;
 
 namespace GodtSkoddFAQ_mappe3_s198611
 {
     public class FAQDb
     {
         FAQContext db = new FAQContext();
-        
+        String errorLogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs";
+
+        // ---------------------------- Log -------------------------------
+
+        public void writeToLog(Exception e)
+        {
+            String errorMessage = e.Message.ToString() + " in " + e.TargetSite.ToString() + e.StackTrace.ToString();
+
+            String day = DateTime.Now.Day.ToString();
+            String month = DateTime.Now.Month.ToString();
+            String year = DateTime.Now.Year.ToString();
+            String today = "" + day + "." + month + "." + year;
+            String nowHour = DateTime.Now.Hour.ToString();
+            String nowMinute = DateTime.Now.Minute.ToString();
+            String todayFile = @"\Log " + today + ".txt";
+
+            if (File.Exists(errorLogPath + todayFile))
+            {
+                using (StreamWriter outputFile = new StreamWriter("" + errorLogPath + todayFile, true))
+                {
+                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + errorMessage);
+                }
+            }
+            else
+            {
+                if (!Directory.Exists(errorLogPath))
+                {
+                    Directory.CreateDirectory(errorLogPath);
+                }
+                using (StreamWriter outputFile = new StreamWriter("" + errorLogPath + todayFile))
+                {
+                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + errorMessage);
+                }
+            }
+        }
+
         // -------------------------- Category ----------------------------
 
         public List<Category> GetAllCategories()
