@@ -7,21 +7,92 @@
     <script type="text/javascript" src="../bootstrap.min.js"></script>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Content/StyleSheet.css" rel="stylesheet" />
+    <!-- <script src="~/Scripts/jquery.validate.js"></script> -->
     <title>Godt Skodd FAQ</title>
 	<meta charset="utf-8" />
 </head>
 <body>
-    <div ng-controller="faqController">
-        <h3>FAQ</h3>
-
-        <div class="text-center" ng-show="loading">
-            <h4>Laster data. Vennligst vent ...</h4>
-        </div>
-
-        <div ng-show="faq">
-            <div>
-                ...
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="" ng-click="goToStartPage()" class="navbar-brand">FAQ</a>
             </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="" ng-click="goToSendRequest()">Send forespørsel</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="" ng-click="goToAllRequests()">Alle forespørsler</a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="goToNewCategory()">Ny kategori</a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="goToNewFAQ()">Ny FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> <!-- end navbar -->
+
+    <div ng-controller="faqController">
+        <div class="container body-content">
+
+            <div class="my-content">
+                <!-- Loading -->
+                <div class="text-center" ng-show="loading">
+                    <h4>Laster data. Vennligst vent ...</h4>
+                </div>
+
+                <!-- FAQ (Start page) -->
+                <div ng-show="faq">
+                    <div>
+                        FAQ
+                    </div>
+                </div>
+
+                <!-- Send request -->
+                <div ng-show="sendRequest">
+                    <div>
+                        SEND REQUEST
+                    </div>
+                </div>
+
+                <!-- All requests -->
+                <div ng-show="allRequests">
+                    <div>
+                        ALL REQUESTS
+                    </div>
+                </div>
+
+                <!-- New category -->
+                <div ng-show="newCategory">
+                    <div>
+                        NEW CATEGORY
+                    </div>
+                </div>
+
+                <!-- New FAQ -->
+                <div ng-show="newFaq">
+                    <div>
+                        NEW FAQ
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <p>&copy; Godt Skodd 2015</p>
+            </footer>
         </div>
     </div>
 </body>
