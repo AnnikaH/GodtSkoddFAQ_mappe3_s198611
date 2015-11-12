@@ -7,8 +7,6 @@ using GodtSkoddFAQ_mappe3_s198611.Models;
 
 namespace GodtSkoddFAQ_mappe3_s198611
 {
-    // TODO: Lagre og Endre (se helt nederst her + GodtSkoddProsjekt på GitHub)
-
     public class FAQDb
     {
         FAQContext db = new FAQContext();
@@ -59,16 +57,44 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
         public bool CreateCategory(Category category)
         {
-            // TODO: Finish
+            var newCategory = new Categories
+            {
+                Name = category.name
+            };
+            
+            try
+            {
+                // save category
+                db.Categories.Add(newCategory);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
-            return false;
+            return true;
         }
 
         public bool UpdateCategory(int id, Category category)
         {
-            // TODO: Finish
+            Categories foundCategory = db.Categories.FirstOrDefault(c => c.ID == id);
 
-            return false;
+            if (foundCategory == null)
+                return false;
+
+            foundCategory.Name = category.name;
+            
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool DeleteCategory(int id)
@@ -171,16 +197,56 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
         public bool CreateFAQ(FAQ faq)
         {
-            // TODO: Finish
+            var newFAQ = new FAQs
+            {
+                Question = faq.question,
+                Answer = faq.answer,
+                CategoryId = faq.categoryId
+            };
 
-            return false;
+            Categories foundCategory = db.Categories.Find(faq.categoryId);
+
+            if (foundCategory != null)
+                newFAQ.Category = foundCategory;
+            else
+                return false;
+
+            try
+            {
+                // save FAQ
+                db.FAQs.Add(newFAQ);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool UpdateFAQ(int id, FAQ faq)
         {
-            // TODO: Finish
+            FAQs foundFAQ = db.FAQs.FirstOrDefault(f => f.ID == id);
 
-            return false;
+            if (foundFAQ == null)
+                return false;
+
+            foundFAQ.Question = faq.question;
+            foundFAQ.Answer = faq.answer;
+            foundFAQ.CategoryId = faq.categoryId;
+            foundFAQ.Category = db.Categories.Find(faq.categoryId);
+            
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool DeleteFAQ(int id)
@@ -261,16 +327,56 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
         public bool CreateRequest(Request request)
         {
-            // TODO: Finish
+            var newRequest = new Requests
+            {
+                SenderFirstName = request.senderFirstName,
+                SenderLastName = request.senderLastName,
+                SenderEmail = request.senderEmail,
+                Subject = request.subject,
+                Question = request.question,
+                Date = request.date,
+                Answered = request.answered
+            };
 
-            return false;
+            try
+            {
+                // save request
+                db.Requests.Add(newRequest);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool UpdateRequest(int id, Request request)
         {
-            // TODO: Finish
+            Requests foundRequest = db.Requests.FirstOrDefault(r => r.ID == id);
 
-            return false;
+            if (foundRequest == null)
+                return false;
+
+            foundRequest.SenderFirstName = request.senderFirstName;
+            foundRequest.SenderLastName = request.senderLastName;
+            foundRequest.SenderEmail = request.senderEmail;
+            foundRequest.Subject = request.subject;
+            foundRequest.Question = request.question;
+            foundRequest.Date = request.date;
+            foundRequest.Answered = request.answered;
+            
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool DeleteRequest(int id)
@@ -292,81 +398,5 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
             return true;
         }
-
-        /*
-        public bool lagreEnKunde(kunde innKunde)
-        {
-            var nyKunde = new Kunde
-            {
-                fornavn = innKunde.fornavn,
-                etternavn = innKunde.etternavn,
-                adresse = innKunde.adresse,
-                postnr = innKunde.postnr
-            };
-
-            Poststed funnetPoststed = db.Poststeder.Find(innKunde.postnr);
-            if (funnetPoststed == null)
-            {
-                // lag poststedet
-                var nyttPoststed = new Poststed
-                {
-                    postnr = innKunde.postnr,
-                    poststed = innKunde.poststed
-                };
-                // legg det inn i den nye kunden
-                nyKunde.poststed = nyttPoststed;
-
-            }
-            try
-            {
-                // lagre kunden
-                db.Kunder.Add(nyKunde);
-                db.SaveChanges();
-            }
-            catch (Exception feil)
-            {
-                return false;
-            }
-            return true;
-        }
-        
-        public bool endreEnKunde(int id, kunde innKunde)
-        {
-            // finn kunden
-            Kunde funnetKunde = db.Kunder.FirstOrDefault(k => k.id == id);
-            if (funnetKunde == null)
-            {
-                return false;
-            }
-            // legg inn ny verdier i denne fra innKunde
-            funnetKunde.fornavn = innKunde.fornavn;
-            funnetKunde.etternavn = innKunde.etternavn;
-            funnetKunde.adresse = innKunde.adresse;
-            funnetKunde.postnr = innKunde.postnr;
-
-            // finn ut om postnummer finnes fra før
-            Poststed funnetPoststed = db.Poststeder.Find(innKunde.postnr);
-            if (funnetPoststed == null)
-            {
-                // lag poststedet
-                var nyttPoststed = new Poststed
-                {
-                    postnr = innKunde.postnr,
-                    poststed = innKunde.poststed
-                };
-                // legg det inn i kunden
-                funnetKunde.poststed = nyttPoststed;
-            }
-            try
-            {
-                // lagre kunden
-                db.SaveChanges();
-            }
-            catch (Exception feil)
-            {
-                return false;
-            }
-            return true;
-        }*/
     }
 }
