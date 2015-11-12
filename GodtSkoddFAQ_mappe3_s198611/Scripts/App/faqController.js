@@ -6,54 +6,6 @@ App.controller("faqController", function ($scope, $http) {
     var urlRequest = '/api/Request';
     var urlCategory = '/api/Category';
     
-    $scope.goToStartPage = function () {
-        window.location.reload;
-    }
-
-    $scope.goToSendRequest = function () {
-        $scope.loading = false;
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.allRequests = false;
-        $scope.newCategory = false;
-        $scope.newFaq = false;
-
-        $scope.$apply;
-    }
-
-    $scope.goToAllRequests = function () {
-        $scope.loading = false;
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.allRequests = true;
-        $scope.newCategory = false;
-        $scope.newFaq = false;
-
-        $scope.$apply();
-    }
-
-    $scope.goToNewCategory = function () {
-        $scope.loading = false;
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.allRequests = false;
-        $scope.newCategory = true;
-        $scope.newFaq = false;
-
-        $scope.$apply();
-    }
-
-    $scope.goToNewFAQ = function () {
-        $scope.loading = false;
-        $scope.faq = false;
-        $scope.sendRequest = false;
-        $scope.allRequests = false;
-        $scope.newCategory = false;
-        $scope.newFaq = true;
-
-        $scope.$apply();
-    }
-
     // All ng-show: loading, faq, sendRequest, allRequests, newCategory, newFaq
 
     // Code for what should happen/show on front page (FAQ):
@@ -64,7 +16,50 @@ App.controller("faqController", function ($scope, $http) {
     $scope.newCategory = true;
     $scope.newFaq = true;
 
-    $scope.$apply();
+    $scope.goToStartPage = function () {
+        $scope.loading = true;
+        $scope.faq = true;
+        $scope.sendRequest = true;
+        $scope.allRequests = true;
+        $scope.newCategory = true;
+        $scope.newFaq = true;
+    }
+
+    $scope.goToSendRequest = function () {
+        $scope.loading = false;
+        $scope.faq = false;
+        $scope.sendRequest = true;
+        $scope.allRequests = false;
+        $scope.newCategory = false;
+        $scope.newFaq = false;
+    }
+
+    $scope.goToAllRequests = function () {
+        $scope.loading = false;
+        $scope.faq = false;
+        $scope.sendRequest = false;
+        $scope.allRequests = true;
+        $scope.newCategory = false;
+        $scope.newFaq = false;
+    }
+
+    $scope.goToNewCategory = function () {
+        $scope.loading = false;
+        $scope.faq = false;
+        $scope.sendRequest = false;
+        $scope.allRequests = false;
+        $scope.newCategory = true;
+        $scope.newFaq = false;
+    }
+
+    $scope.goToNewFAQ = function () {
+        $scope.loading = false;
+        $scope.faq = false;
+        $scope.sendRequest = false;
+        $scope.allRequests = false;
+        $scope.newCategory = false;
+        $scope.newFaq = true;
+    }
 
     /*$http.get(urlFAQ).
         success(function (allFAQs) {
