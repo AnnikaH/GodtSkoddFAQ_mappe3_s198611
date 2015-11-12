@@ -109,11 +109,12 @@
 
     <!-- FAQ part -->
                     <div ng-show="faqPart">
-                        <h2 ng-show="newFAQHeader" class="text-center">Legg til nytt FAQ</h2>
+                        <!-- Add new or change FAQ: -->
+
+                        <h2 ng-show="registerFAQHeader" class="text-center">Legg til nytt FAQ</h2>
                         <h2 ng-show="updateFAQHeader" class="text-center">Endre FAQ</h2>
 
-                        <!-- Show all categories: -->
-                        <h4>Alle kategorier</h4>
+                        <!-- Show all categories (because the user has to fill in category id): -->
                         <table class="table">
                             <thead>
                                 <tr>
@@ -129,16 +130,10 @@
                             </tbody>
                         </table>
 
-                        <!-- Add new og change FAQ: -->
                         <h4 ng-show="newFAQHeader">Nytt FAQ</h4>
                         <h4 ng-show="updateFAQHeader">Endre FAQ</h4>
 
                         <form name="skjemaNyFAQ">
-                            <div class="form-group">
-                                <label>Kategori ID:</label>
-                                <input class="form-control" name="kategoriId" ng-model="kategoriId" ng-required="true" ng-pattern="/^[0-9]{1,2}$/" />
-                                <p class="label label-info" ng-show="skjemaNyFAQ.kategoriId.$invalid && skjemaNyFAQ.kategoriId.$dirty">Skriv inn en lovlig kategori ID</p>
-                            </div>
                             <div class="form-group">
                                 <label>Spørsmål:</label>
                                 <input class="form-control" name="sporsmaal" ng-model="sporsmaal" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,40}$/" />
@@ -150,10 +145,17 @@
                                 <p class="label label-info" ng-show="skjemaNyFAQ.svar.$invalid && skjemaNyFAQ.svar.$dirty">Skriv inn et lovlig svar</p>
                             </div>
                             <div class="form-group">
+                                <label>Kategori ID:</label>
+                                <input class="form-control" name="kategoriId" ng-model="kategoriId" ng-required="true" ng-pattern="/^[0-9]{1,2}$/" />
+                                <p class="label label-info" ng-show="skjemaNyFAQ.kategoriId.$invalid && skjemaNyFAQ.kategoriId.$dirty">Skriv inn en lovlig kategori ID</p>
+                            </div>
+                            <div class="form-group">
                                 <button class="btn btn-success" ng-click="updateFAQ()" ng-disabled="skjemaNyFAQ.$invalid" ng-show="updateFAQButton">Endre</button>
                                 <button class="btn btn-primary" ng-click="registerFAQ()" ng-disabled="skjemaNyFAQ.$invalid" ng-show="registerFAQButton">Registrer</button>
                             </div>
                         </form>
+
+                        <button class="btn btn-danger" ng-click="cancelFAQ()" ng-show="cancelFAQButton">Avbryt</button>
                     </div>
                 </div>
 
@@ -193,12 +195,10 @@
 
     <!-- Category Part -->
                     <div ng-show="categoryPart">
-                        <h2 ng-show="newCategoryHeader" class="text-center">Legg til ny kategori</h2>
-                        <h2 ng-show="updateCategoryHeader" class="text-center">Endre kategori</h2>
-
                         <!-- Add new or change category: -->
-                        <h4 ng-show="newCategoryHeader">Ny kategori</h4>
-                        <h4 ng-show="updateCategoryHeader">Endre kategori</h4>
+
+                        <h2 ng-show="registerCategoryHeader" class="text-center">Legg til ny kategori</h2>
+                        <h2 ng-show="updateCategoryHeader" class="text-center">Endre kategori</h2>
 
                         <form name="skjemaNyKategori">
                             <div class="form-group">
@@ -211,6 +211,8 @@
                                 <button class="btn btn-primary" ng-click="registerCategory()" ng-disabled="skjemaNyKategori.$invalid" ng-show="registerCategoryButton">Registrer</button>
                             </div>
                         </form>
+
+                        <button class="btn btn-danger" ng-click="cancelCategory()" ng-show="cancelCategoryButton">Avbryt</button>
                     </div>
                 </div>
                 
