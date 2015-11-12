@@ -108,6 +108,9 @@ App.controller("faqController", function ($scope, $http) {
             $scope.categories = allCategories;
             $scope.loading = false;
 
+            $scope.newFAQHeader = true;
+            $scope.updateFAQHeader = false;
+
             $scope.updateFAQButton = false;
             $scope.registerFAQButton = true;
         }).
