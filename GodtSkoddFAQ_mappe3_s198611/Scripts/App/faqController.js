@@ -9,55 +9,60 @@ App.controller("faqController", function ($scope, $http) {
     // All ng-show: loading, faq, sendRequest, allRequests, newCategory, newFaq
 
     // Code for what should happen/show on front page (FAQ):
+    $scope.sendRequest = false;
+    $scope.allRequests = false;
+    $scope.newCategory = false;
+    $scope.newFaq = false;
     $scope.loading = true;
     $scope.faq = true;
-    $scope.sendRequest = true;
-    $scope.allRequests = true;
-    $scope.newCategory = true;
-    $scope.newFaq = true;
 
     $scope.goToStartPage = function () {
+        $scope.sendRequest = false;
+        $scope.allRequests = false;
+        $scope.newCategory = false;
+        $scope.newFaq = false;
+
         $scope.loading = true;
         $scope.faq = true;
-        $scope.sendRequest = true;
-        $scope.allRequests = true;
-        $scope.newCategory = true;
-        $scope.newFaq = true;
     }
 
     $scope.goToSendRequest = function () {
-        $scope.loading = false;
         $scope.faq = false;
-        $scope.sendRequest = true;
         $scope.allRequests = false;
         $scope.newCategory = false;
         $scope.newFaq = false;
+
+        $scope.loading = true;
+        $scope.sendRequest = true;
     }
 
     $scope.goToAllRequests = function () {
-        $scope.loading = false;
         $scope.faq = false;
         $scope.sendRequest = false;
-        $scope.allRequests = true;
         $scope.newCategory = false;
         $scope.newFaq = false;
+
+        $scope.loading = true;
+        $scope.allRequests = true;
     }
 
     $scope.goToNewCategory = function () {
-        $scope.loading = false;
         $scope.faq = false;
         $scope.sendRequest = false;
         $scope.allRequests = false;
-        $scope.newCategory = true;
         $scope.newFaq = false;
+
+        $scope.loading = true;
+        $scope.newCategory = true;
     }
 
     $scope.goToNewFAQ = function () {
-        $scope.loading = false;
         $scope.faq = false;
         $scope.sendRequest = false;
         $scope.allRequests = false;
         $scope.newCategory = false;
+
+        $scope.loading = true;
         $scope.newFaq = true;
     }
 
