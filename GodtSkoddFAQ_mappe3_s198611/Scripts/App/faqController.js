@@ -122,7 +122,7 @@ App.controller("faqController", function ($scope, $http) {
         // get all categories
         $http.get(urlCategory).
         success(function (allCategories) {
-            $scope.faqs = allCategories;
+            $scope.categories = allCategories;
             $scope.loading = false;
         }).
         error(function (data, status) {
@@ -165,25 +165,71 @@ App.controller("faqController", function ($scope, $http) {
         $scope.updateCategoryButton = true;
         $scope.cancelCategoryButton = true;
 
-        // fill in the form (formCategory)
-        
+        // get the category from the database and fill in the form (formCategory):        
+        $http.get(urlCategory + "/" + id).
+            success(function (category) {
+                $scope.idCategory = category.id;    // can get this later
+                $scope.nameCategory = category.name;
+            }).
+            error(function (data, status) {
+                console.log(status + data);
+            });
     }
 
     // deleteCategory(id)
     $scope.deleteCategory = function (id) {
-
+        $http.delete(urlCategory + "/" + id).
+            success(function (data) {
+                $scope.goToAllCategories();
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // updateCategory()
     $scope.updateCategory = function () {
         // in formCategory
+
+        // create category
+        var category = {
+            name: $scope.nameCategory
+        };
+
+        //$scope.visSkjema = false;
+        //$scope.visKunder = true;
+
+        $http.put(urlCategory + "/" + $scope.idCategory, category).
+            success(function (data) {
+                $scope.goToAllCategories();
+                $scope.categoryPart = false;
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // registerCategory()
     $scope.registerCategory = function () {
         // in formCategory
 
+        var category = {
+            name: $scope.nameCategory
+        };
 
+        $http.post(urlCategory, category).
+          success(function (data) {
+              $scope.goToAllCategories();
+              $scope.categoryPart = false;
+
+              //$scope.visKunder = true;
+              //$scope.visSkjema = false;
+              //$scope.regKnapp = true;
+              //console.log("Lagre kunder OK!")
+          }).
+          error(function (data, status) {
+              //console.log(status + data);
+          });
     }
 
     // cancelCategory()
