@@ -164,6 +164,9 @@ App.controller("faqController", function ($scope, $http) {
         $scope.registerCategoryButton = false;
         $scope.updateCategoryButton = true;
         $scope.cancelCategoryButton = true;
+
+        // fill in the form (formCategory)
+        
     }
 
     // deleteCategory(id)
@@ -171,14 +174,14 @@ App.controller("faqController", function ($scope, $http) {
 
     }
 
-    // updateFAQ()
+    // updateCategory()
     $scope.updateCategory = function () {
-        // i skjemaNyKategori
+        // in formCategory
     }
 
-    // registerFAQ()
+    // registerCategory()
     $scope.registerCategory = function () {
-        // i skjemaNyKategori
+        // in formCategory
 
 
     }
@@ -231,6 +234,9 @@ App.controller("faqController", function ($scope, $http) {
         $scope.registerFAQButton = false;
         $scope.updateFAQButton = true;
         $scope.cancelFAQButton = true;
+
+        // fill in the form (formFAQ)
+        
     }
 
     // deleteFAQ(id)
@@ -240,12 +246,12 @@ App.controller("faqController", function ($scope, $http) {
 
     // updateFAQ()
     $scope.updateFAQ = function () {
-        // i skjemaNyFAQ
+        // in formFAQ
     }
 
     // registerFAQ()
     $scope.registerFAQ = function () {
-        // i skjemaNyFAQ
+        // in formFAQ
     }
 
     // cancelFAQ()
@@ -256,16 +262,51 @@ App.controller("faqController", function ($scope, $http) {
     // ---------- Request ------------
 
     // goToNewRequest()
+    $scope.goToNewRequest = function () {
+        $scope.requestPart = true;
+
+        $scope.registerRequestHeader = true;
+        $scope.updateRequestHeader = false;
+
+        $scope.registerRequestButton = true;
+        $scope.updateRequestButton = false;
+        $scope.cancelRequestButton = true;
+    }
 
     // goToUpdateRequest(id)
+    $scope.goToUpdateRequest = function (id) {
+        $scope.requestPart = true;
 
-    // deleteFAQ(id)
+        $scope.registerRequestHeader = false;
+        $scope.updateRequestHeader = true;
+
+        $scope.registerRequestButton = false;
+        $scope.updateRequestButton = true;
+        $scope.cancelRequestButton = true;
+
+        // fill in the form (formRequest)
+
+    }
+
+    // deleteRequest(id)
+    $scope.deleteRequest = function (id) {
+
+    }
 
     // updateRequest()
+    $scope.updateRequest = function () {
+        // in formRequest
+    }
 
     // registerRequest()
+    $scope.registerRequest = function () {
+        // in formRequest
+    }
 
     // cancelRequest()
+    $scope.cancelRequest = function () {
+        $scope.requestPart = false;
+    }
 
 
     /*$http.get(urlFAQ).
