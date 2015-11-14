@@ -152,6 +152,9 @@ App.controller("faqController", function ($scope, $http) {
         $scope.registerCategoryButton = true;
         $scope.updateCategoryButton = false;
         $scope.cancelCategoryButton = true;
+
+        // empty form if filled:
+        $scope.nameCategory = "";
     }
 
     // goToUpdateCategory(id)
@@ -195,9 +198,6 @@ App.controller("faqController", function ($scope, $http) {
         var category = {
             name: $scope.nameCategory
         };
-
-        //$scope.visSkjema = false;
-        //$scope.visKunder = true;
 
         $http.put(urlCategory + "/" + $scope.idCategory, category).
             success(function (data) {
