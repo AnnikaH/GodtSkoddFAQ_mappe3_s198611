@@ -18,6 +18,8 @@ App.controller("faqController", function ($scope, $http) {
         categoryPart (inni allCategoriesPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
 
         faqPart (inni allFaqsPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
+
+        Etter hvert: requestPart
     */
 
     // Code for what should happen/show on front page (FAQ):
@@ -74,6 +76,16 @@ App.controller("faqController", function ($scope, $http) {
 
         $scope.loading = true;
         $scope.allFaqsPage = true;
+
+        // get all FAQs
+        $http.get(urlFAQ).
+        success(function (allFAQs) {
+            $scope.faqs = allFAQs;
+            $scope.loading = false;
+        }).
+        error(function (data, status) {
+
+        });
     }
 
     // goToAllRequests()
@@ -85,6 +97,16 @@ App.controller("faqController", function ($scope, $http) {
         
         $scope.loading = true;
         $scope.allRequestsPage = true;
+
+        // get all requests
+        $http.get(urlRequest).
+        success(function (allRequests) {
+            $scope.requests = allRequests;
+            $scope.loading = false;
+        }).
+        error(function (data, status) {
+
+        });
     }
 
     // goToAllCategories()
@@ -96,6 +118,16 @@ App.controller("faqController", function ($scope, $http) {
         
         $scope.loading = true;
         $scope.allCategoriesPage = true;
+
+        // get all FAQs
+        $http.get(urlCategory).
+        success(function (allCategories) {
+            $scope.faqs = allCategories;
+            $scope.loading = false;
+        }).
+        error(function (data, status) {
+
+        });
     }
 
 // ---------------------------- new and update ------------------------------
@@ -122,6 +154,23 @@ App.controller("faqController", function ($scope, $http) {
         $scope.cancelCategoryButton = true;
     }
 
+    // goToUpdateCategory(id)
+    $scope.goToUpdateCategory = function (id) {
+        $scope.categoryPart = true;
+
+        $scope.registerCategoryHeader = false;
+        $scope.updateCategoryHeader = true;
+
+        $scope.registerCategoryButton = false;
+        $scope.updateCategoryButton = true;
+        $scope.cancelCategoryButton = true;
+    }
+
+    // deleteCategory(id)
+    $scope.deleteCategory = function (id) {
+
+    }
+
     // updateFAQ()
     $scope.updateCategory = function () {
         // i skjemaNyKategori
@@ -130,6 +179,8 @@ App.controller("faqController", function ($scope, $http) {
     // registerFAQ()
     $scope.registerCategory = function () {
         // i skjemaNyKategori
+
+
     }
 
     // cancelCategory()
@@ -159,7 +210,7 @@ App.controller("faqController", function ($scope, $http) {
         $scope.updateFAQButton = false;
         $scope.cancelFAQButton = true;
 
-        // get all categories
+        // get all categories (so the user can see what category ID to fill in)
         $http.get(urlCategory).
         success(function (allCategories) {
             $scope.categories = allCategories;
@@ -168,6 +219,23 @@ App.controller("faqController", function ($scope, $http) {
         error(function (data, status) {
 
         });
+    }
+
+    // goToUpdateFAQ(id)
+    $scope.goToUpdateFAQ = function (id) {
+        $scope.faqPart = true;
+
+        $scope.registerFAQHeader = false;
+        $scope.updateFAQHeader = true;
+
+        $scope.registerFAQButton = false;
+        $scope.updateFAQButton = true;
+        $scope.cancelFAQButton = true;
+    }
+
+    // deleteFAQ(id)
+    $scope.deleteFAQ = function (id) {
+
     }
 
     // updateFAQ()
@@ -184,6 +252,21 @@ App.controller("faqController", function ($scope, $http) {
     $scope.cancelFAQ = function () {
         $scope.faqPart = false;
     }
+
+    // ---------- Request ------------
+
+    // goToNewRequest()
+
+    // goToUpdateRequest(id)
+
+    // deleteFAQ(id)
+
+    // updateRequest()
+
+    // registerRequest()
+
+    // cancelRequest()
+
 
     /*$http.get(urlFAQ).
         success(function (allFAQs) {
