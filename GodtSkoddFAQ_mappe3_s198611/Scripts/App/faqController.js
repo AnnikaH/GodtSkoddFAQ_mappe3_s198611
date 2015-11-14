@@ -119,7 +119,7 @@ App.controller("faqController", function ($scope, $http) {
         $scope.loading = true;
         $scope.allCategoriesPage = true;
 
-        // get all FAQs
+        // get all categories
         $http.get(urlCategory).
         success(function (allCategories) {
             $scope.faqs = allCategories;
