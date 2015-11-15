@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -61,8 +61,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return allCategories;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 List<Category> allCategories = new List<Category>();
                 return allCategories;
             }
@@ -85,8 +86,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return oneCategory;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return null;
             }
         }
@@ -104,8 +106,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 db.Categories.Add(newCategory);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -125,8 +128,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
             {
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -145,8 +149,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 db.Categories.Remove(foundCategory);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -169,8 +174,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return allFAQs;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 List<FAQ> allFAQs = new List<FAQ>();
                 return allFAQs;
             }
@@ -195,8 +201,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return oneFAQ;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return null;
             }
         }
@@ -224,8 +231,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return FAQs;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 List<FAQ> FAQs = new List<FAQ>();
                 return FAQs;
             }
@@ -253,8 +261,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 db.FAQs.Add(newFAQ);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -277,8 +286,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
             {
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -297,8 +307,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 db.FAQs.Remove(foundFAQ);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -325,8 +336,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return allRequests;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 List<Request> allRequests = new List<Request>();
                 return allRequests;
             }
@@ -355,8 +367,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
 
                 return oneRequest;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return null;
             }
         }
@@ -380,8 +393,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 db.Requests.Add(newRequest);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -407,8 +421,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
             {
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
@@ -427,8 +442,9 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 db.Requests.Remove(foundRequest);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+            	writeToLog(e);
                 return false;
             }
 
