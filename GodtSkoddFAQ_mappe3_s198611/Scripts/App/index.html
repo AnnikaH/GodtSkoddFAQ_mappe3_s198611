@@ -195,7 +195,7 @@
                                 <td>{{request.question}}</td>
                                 <td>{{request.date | date:'EEE, dd. MMM yyyy, HH:mm:ss'}}</td>
                                 <td>
-                                    <input type="checkbox" class="checkbox disabled" checked="{{request.answered}}" ng-disabled="true" />
+                                    <input ng-checked="{{request.answered}}" type="checkbox" class="checkbox disabled" ng-disabled="true" />
                                 </td>
                                 <td>
                                     <button class="btn btn-success" ng-click="goToUpdateRequest(request.id)">Endre</button>
