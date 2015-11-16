@@ -26,3 +26,7 @@ h4 {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+button.add-button {
+    margin-bottom: 15px;
+}
