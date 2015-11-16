@@ -167,7 +167,7 @@ App.controller("faqController", function ($scope, $http) {
                 $http.get(urlCategory).
                     success(function (allCategories) {
                         
-                        // double for-loop on the data already collected instead of many calls to the server:
+                        // double for-loop on the data already collected instead of many calls to the server (code commented out below):
                         angular.forEach(allFAQs, function (faq) {
                             var catId = faq.categoryId;
 
