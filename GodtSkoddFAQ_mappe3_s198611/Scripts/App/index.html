@@ -7,7 +7,6 @@
     <script type="text/javascript" src="../bootstrap.min.js"></script>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Content/StyleSheet.css" rel="stylesheet" />
-    <!-- <script src="~/Scripts/jquery.validate.js"></script> -->
     <title>Godt Skodd FAQ</title>
 	<meta charset="utf-8" />
 </head>
@@ -34,10 +33,10 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="" ng-click="goToAllFAQs()">FAQs</a>
+                            <a href="" ng-click="goToAllRequests()">Forespørsler</a>
                         </li>
                         <li>
-                            <a href="" ng-click="goToAllRequests()">Forespørsler</a>
+                            <a href="" ng-click="goToAllFAQs()">FAQ</a>
                         </li>
                         <li>
                             <a href="" ng-click="goToAllCategories()">Kategorier</a>
@@ -137,12 +136,13 @@
 
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr class="active">
                                 <th>#</th>
                                 <th>Spørsmål</th>
                                 <th>Svar</th>
                                 <th>Kategori #</th>
                                 <th>Kategorinavn</th> <!-- hente inn i js og plassere i td med id -->
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="faq in faqs">
@@ -171,7 +171,7 @@
                         <h4 class="text-left">Kategorier</h4>
                         <table class="table table-hover">
                             <thead>
-                                <tr>
+                                <tr class="active">
                                     <th>#</th>
                                     <th>Navn</th>
                                 </tr>
@@ -226,7 +226,7 @@
 
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr class="active">
                                 <th>#</th>
                                 <th>Navn</th>
                                 <th>E-post</th>
@@ -234,6 +234,7 @@
                                 <th>Spørsmål</th>
                                 <th>Tidspunkt</th>
                                 <th>Besvart</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="request in requests">
@@ -314,9 +315,10 @@
                     
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr class="active">
                                 <th>#</th>
                                 <th>Navn</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="category in categories">

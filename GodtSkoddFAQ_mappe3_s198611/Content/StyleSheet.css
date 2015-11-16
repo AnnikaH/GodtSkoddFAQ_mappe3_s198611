@@ -21,3 +21,8 @@ h2.main-header {
 span#loading {
     font-size: 18px;
 }
+
+h4 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
