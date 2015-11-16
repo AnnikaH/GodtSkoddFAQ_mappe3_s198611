@@ -15,11 +15,11 @@ App.controller("faqController", function ($scope, $http) {
         allCategoriesPage
 
        All ng-show parts:
-        categoryPart (inni allCategoriesPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
-
         faqPart (inni allFaqsPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
 
-        Etter hvert: requestPart
+        requestPart (inni allRequestsPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
+
+        categoryPart (inni allCategoriesPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
     */
 
     // Code for what should happen/show on front page (FAQ):
@@ -103,8 +103,19 @@ App.controller("faqController", function ($scope, $http) {
         // get all requests
         $http.get(urlRequest).
         success(function (allRequests) {
+            // have to run through all the objects to get the date-number (because the objects' date from backend is f.ex.: /Date(1447629982300)/
+            angular.forEach(allRequests, function (item) {
+                item.date = new Date(parseInt((item.date).substr(6)));
+            })
+
             $scope.requests = allRequests;
             $scope.loading = false;
+
+            /*angular.forEach($scope.requests, function (item) {
+                var dateFromDb = item.date;
+                alert(dateFromDb.toString());
+                item.date = new Date();
+            })*/
         }).
         error(function (data, status) {
 
@@ -171,7 +182,7 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.nameCategory = category.name;
             }).
             error(function (data, status) {
-                console.log(status + data);
+                //console.log(status + data);
             });
     }
 
@@ -237,15 +248,6 @@ App.controller("faqController", function ($scope, $http) {
 
     // goToNewFaq()
     $scope.goToNewFaq = function () {
-        /*$scope.faqPage = false;
-        $scope.sendRequestPage = false;
-        $scope.allFaqsPage = false;
-        $scope.allRequestsPage = false;
-        $scope.newCategoryPage = false;
-
-        $scope.loading = true;
-        $scope.newFaqPage = true;*/
-
         $scope.faqPart = true;
 
         $scope.registerFAQHeader = true;
@@ -284,23 +286,74 @@ App.controller("faqController", function ($scope, $http) {
         $scope.updateFAQButton = true;
         $scope.cancelFAQButton = true;
 
-        // fill in the form (formFAQ)
-        
+        // get the FAQ from the database and fill in the form (formFAQ)
+        $http.get(urlFAQ + "/" + id).
+            success(function (faq) {
+                $scope.idFAQ = faq.id;    // can get this later
+                $scope.questionFAQ = faq.question;
+                $scope.answerFAQ = faq.answer;
+                $scope.categoryIdFAQ = faq.categoryId;
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // deleteFAQ(id)
     $scope.deleteFAQ = function (id) {
-
+        $http.delete(urlFAQ + "/" + id).
+            success(function (data) {
+                $scope.goToAllFAQs();
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // updateFAQ()
     $scope.updateFAQ = function () {
         // in formFAQ
+
+        // create FAQ
+        var faq = {
+            question: $scope.questionFAQ,
+            answer: $scope.answerFAQ,
+            categoryId: $scope.categoryIdFAQ
+        };
+
+        $http.put(urlFAQ + "/" + $scope.idFAQ, faq).
+            success(function (data) {
+                $scope.goToAllFAQs();
+                $scope.faqPart = false;
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // registerFAQ()
     $scope.registerFAQ = function () {
         // in formFAQ
+
+        var faq = {
+            question: $scope.questionFAQ,
+            answer: $scope.answerFAQ,
+            categoryId: $scope.categoryIdFAQ
+        };
+
+        $http.post(urlFAQ, faq).
+          success(function (data) {
+              $scope.goToAllFAQs();
+              $scope.faqPart = false;
+
+              //$scope.visKunder = true;
+              //$scope.visSkjema = false;
+              //$scope.regKnapp = true;
+              //console.log("Lagre kunder OK!")
+          }).
+          error(function (data, status) {
+              //console.log(status + data);
+          });
     }
 
     // cancelFAQ()
@@ -327,6 +380,7 @@ App.controller("faqController", function ($scope, $http) {
         $scope.senderEmailRequest = "";
         $scope.subjectRequest = "";
         $scope.questionRequest = "";
+        $scope.answeredRequest = false;
         // to avoid "fake" error messages for the form fields:
         $scope.formRequest.$setPristine();
     }
@@ -342,25 +396,85 @@ App.controller("faqController", function ($scope, $http) {
         $scope.updateRequestButton = true;
         $scope.cancelRequestButton = true;
 
-        // fill in the form (formRequest)
-
+        // get the request from the database and fill in the form (formRequest)
+        $http.get(urlRequest + "/" + id).
+            success(function (request) {
+                $scope.idRequest = request.id;    // can get this later
+                $scope.senderFirstNameRequest = request.senderFirstName;
+                $scope.senderLastNameRequest = request.senderLastName;
+                $scope.senderEmailRequest = request.senderEmail;
+                $scope.subjectRequest = request.subject;
+                $scope.questionRequest = request.question;
+                $scope.answeredRequest = request.answered;
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // deleteRequest(id)
     $scope.deleteRequest = function (id) {
-
+        $http.delete(urlRequest + "/" + id).
+            success(function (data) {
+                $scope.goToAllRequests();
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // updateRequest()
     $scope.updateRequest = function () {
         // in formRequest
 
+        // create request
+        var request = {
+            senderFirstName: $scope.senderFirstNameRequest,
+            senderLastName: $scope.senderLastNameRequest,
+            senderEmail: $scope.senderEmailRequest,
+            subject: $scope.subjectRequest,
+            question: $scope.questionRequest,
+            date: new Date(), // now
+            answered: $scope.answeredRequest
+        };
+
+        $http.put(urlRequest + "/" + $scope.idRequest, request).
+            success(function (data) {
+                $scope.goToAllRequests();
+                $scope.requestPart = false;
+            }).
+            error(function (data, status) {
+                //console.log(status + data);
+            });
     }
 
     // registerRequest()
     $scope.registerRequest = function () {
         // in formRequest
 
+        var request = {
+            senderFirstName: $scope.senderFirstNameRequest,
+            senderLastName: $scope.senderLastNameRequest,
+            senderEmail: $scope.senderEmailRequest,
+            subject: $scope.subjectRequest,
+            question: $scope.questionRequest,
+            date: new Date(),   // now
+            answered: $scope.answeredRequest
+        };
+
+        $http.post(urlRequest, request).
+          success(function (data) {
+              $scope.goToAllRequests();
+              $scope.requestPart = false;
+
+              //$scope.visKunder = true;
+              //$scope.visSkjema = false;
+              //$scope.regKnapp = true;
+              //console.log("Lagre kunder OK!")
+          }).
+          error(function (data, status) {
+              //console.log(status + data);
+          });
     }
 
     // cancelRequest()
