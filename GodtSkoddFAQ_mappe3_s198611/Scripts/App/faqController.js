@@ -61,7 +61,7 @@ App.controller("faqController", function ($scope, $http) {
     $scope.filterFAQFromCategory = function (id) {
         // also possible to get all FAQs and just pick all with categoryId equal to id here in js
 
-        $scope.loading = true;
+        //$scope.loading = true;
 
         // first "clear/unmark" all categories in case one has been selected before:
         angular.forEach($scope.categories, function (item) {
@@ -78,7 +78,7 @@ App.controller("faqController", function ($scope, $http) {
                 $('#categoryChosen-' + id).addClass("active");  // the selected category
             }).
             error(function (data, status) {
-                $scope.goToStartPage(); // reset (choose "Alle") if error occurs
+                //$scope.goToStartPage(); // reset (choose "Alle") if error occurs?
             });
     }
 

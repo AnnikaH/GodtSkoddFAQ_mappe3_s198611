@@ -51,16 +51,14 @@
             <div class="my-content">
 
 <!-- Loading -->
-                <div class="text-center" ng-show="loading">
-                    <h4>Laster data. Vennligst vent ...</h4>
-                </div>
-
+                <span id="loading" class="pull-left" ng-show="loading">Laster data. Vennligst vent ...</span>
+                
 <!-- FAQ page (start page) -->
                 <div ng-show="faqPage">
-                    <h2 class="text-center">Godt Skodd FAQ</h2>
+                    <h2 class="text-center main-header">Godt Skodd FAQ</h2>
 
-                    <!--- Is going to be possible to select FAQs by category? -->
-                    <ul class="nav nav-pills">
+                    <!--- Categories to choose from: -->
+                    <ul id="categoriesNav" class="nav nav-pills">
                         <li id="allCategories" role="presentation">
                             <a href="" ng-click="goToStartPage()">Alle</a>
                         </li>
@@ -83,17 +81,17 @@
 
 <!-- Send request page -->
                 <div ng-show="sendRequestPage">
-                    <div>
-                        SEND REQUEST
-                    </div>
+                    <h2 class="text-center main-header">Send forespørsel</h2>
+
+                    <!-- REUSE (JUST SHOW) NY FORESPØRSEL (REQUEST) ?? -->
                 </div>
 
 <!-- All FAQs page -->
                 <div ng-show="allFaqsPage">
-                    <h2 class="text-center">Alle FAQs</h2>
+                    <h2 class="text-center main-header">FAQ</h2>
                  
                     <div>
-                        <button class="btn btn-primary pull-right" ng-click="goToNewFaq()">Legg til nytt FAQ</button>
+                        <button class="btn btn-primary pull-right" ng-click="goToNewFaq()"><span class="glyphicon glyphicon-plus"></span> Nytt FAQ</button>
                     </div>
 
                     <table class="table table-hover">
@@ -125,8 +123,8 @@
                     <div ng-show="faqPart">
                         <!-- Add new or change FAQ: -->
 
-                        <h2 ng-show="registerFAQHeader" class="text-center">Legg til nytt FAQ</h2>
-                        <h2 ng-show="updateFAQHeader" class="text-center">Endre FAQ</h2>
+                        <h2 ng-show="registerFAQHeader" class="text-center main-header">Nytt FAQ</h2>
+                        <h2 ng-show="updateFAQHeader" class="text-center main-header">Endre FAQ</h2>
 
                         <!-- Show all categories (because the user has to fill in category id): -->
                         <h4 class="text-left">Kategorier</h4>
@@ -179,10 +177,10 @@
 
 <!-- All requests page -->
                 <div ng-show="allRequestsPage">
-                    <h2 class="text-center">Alle forespørsler</h2>
+                    <h2 class="text-center main-header">Forespørsler</h2>
 
                     <div>
-                        <button class="btn btn-primary pull-right" ng-click="goToNewRequest()">Legg til ny forespørsel</button>
+                        <button class="btn btn-primary pull-right" ng-click="goToNewRequest()"><span class="glyphicon glyphicon-plus"></span> Ny forespørsel</button>
                     </div>
 
                     <table class="table table-hover">
@@ -220,8 +218,8 @@
                     <div ng-show="requestPart">
                         <!-- Add new or change request: -->
 
-                        <h2 ng-show="registerRequestHeader" class="text-center">Legg til ny forespørsel</h2>
-                        <h2 ng-show="updateRequestHeader" class="text-center">Endre forespørsel</h2>
+                        <h2 ng-show="registerRequestHeader" class="text-center main-header">Ny forespørsel</h2>
+                        <h2 ng-show="updateRequestHeader" class="text-center main-header">Endre forespørsel</h2>
 
                         <form name="formRequest">
                             <div class="form-group">
@@ -267,10 +265,10 @@
 
 <!-- All categories page -->
                 <div ng-show="allCategoriesPage">
-                    <h2 class="text-center">Alle kategorier</h2>
+                    <h2 class="text-center main-header">Kategorier</h2>
                     
                     <div>
-                        <button class="btn btn-primary pull-right" ng-click="goToNewCategory()">Legg til ny kategori</button>
+                        <button class="btn btn-primary pull-right" ng-click="goToNewCategory()"><span class="glyphicon glyphicon-plus"></span> Ny kategori</button>
                     </div>
                     
                     <table class="table table-hover">
@@ -296,8 +294,8 @@
                     <div ng-show="categoryPart">
                         <!-- Add new or change category: -->
 
-                        <h2 ng-show="registerCategoryHeader" class="text-center">Legg til ny kategori</h2>
-                        <h2 ng-show="updateCategoryHeader" class="text-center">Endre kategori</h2>
+                        <h2 ng-show="registerCategoryHeader" class="text-center main-header">Ny kategori</h2>
+                        <h2 ng-show="updateCategoryHeader" class="text-center main-header">Endre kategori</h2>
 
                         <form name="formCategory">
                             <div class="form-group">

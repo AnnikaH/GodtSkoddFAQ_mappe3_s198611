@@ -9,3 +9,15 @@ footer {
     border-top: solid 1px;
     padding-top: 1em;
 }
+
+ul#categoriesNav {
+    padding-bottom: 15px;
+}
+
+h2.main-header {
+    padding: 10px;
+}
+
+span#loading {
+    font-size: 18px;
+}
