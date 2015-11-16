@@ -35,18 +35,54 @@ App.controller("faqController", function ($scope, $http) {
         $scope.loading = true;
         $scope.faqPage = true;
 
+        $('#allCategories').addClass("active");
+
+        // get all categories:
+        $http.get(urlCategory).
+            success(function (allCategories) {
+                $scope.categories = allCategories;
+            }).
+            error(function (data, status) {
+
+            });
+
         // get all FAQs
         $http.get(urlFAQ).
-        success(function (allFAQs) {
-            $scope.faqs = allFAQs;
-            $scope.loading = false;
-        }).
-        error(function (data, status) {
-            
-        });
+            success(function (allFAQs) {
+                $scope.faqs = allFAQs;
+                $scope.loading = false;
+            }).
+            error(function (data, status) {
+
+            });
     }
 
-    // toggle FAQ
+    // filterFAQFromCategory(id)
+    $scope.filterFAQFromCategory = function (id) {
+        // also possible to get all FAQs and just pick all with categoryId equal to id here in js
+
+        $scope.loading = true;
+
+        // first "clear/unmark" all categories in case one has been selected before:
+        angular.forEach($scope.categories, function (item) {
+            $('#categoryChosen-' + item.id).removeClass("active");
+        });
+        // and also the "Alle" category:
+        $('#allCategories').removeClass("active");
+
+        $http.get(urlFAQ + "/GetByCategory/" + id).
+            success(function (relevantFAQs) {
+                $scope.faqs = relevantFAQs;
+                $scope.loading = false;
+
+                $('#categoryChosen-' + id).addClass("active");  // the selected category
+            }).
+            error(function (data, status) {
+                $scope.goToStartPage(); // reset (choose "Alle") if error occurs
+            });
+    }
+
+    // toggle FAQ - toggleAnswer(id)
     $scope.toggleAnswer = function (id) {
         $('#faq-' + id).toggle();
     }

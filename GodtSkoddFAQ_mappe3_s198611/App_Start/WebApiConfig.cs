@@ -19,6 +19,13 @@ namespace GodtSkoddFAQ_mappe3_s198611
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // because of api/FAQ/GetByCategory/5 (get all FAQs from the selected category):
+            config.Routes.MapHttpRoute(
+                name: "DefaultApiWithAction",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
         }
     }
 }

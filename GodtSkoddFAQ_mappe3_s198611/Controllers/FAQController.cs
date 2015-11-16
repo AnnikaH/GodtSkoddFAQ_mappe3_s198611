@@ -53,6 +53,28 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             };
         }
 
+        // GET api/FAQ/GetByCategory/5
+        public HttpResponseMessage GetByCategory(int id)
+        {
+            List<FAQ> relevantFAQs = faqDb.GetAllFAQsFromCategory(id);
+
+            var Json = new JavaScriptSerializer();
+            string JsonString = Json.Serialize(relevantFAQs);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
+                StatusCode = HttpStatusCode.OK
+            };
+
+            // alternativ til return-koden over - for å forklare dette bedre :
+
+            //var respons = new HttpResponseMessage();
+            //respons.Content = new StringContent(JsonString, Encoding.UTF8, "application/json");
+            //respons.StatusCode = HttpStatusCode.OK;
+            //return respons;
+        }
+
         // POST api/FAQ
         public HttpResponseMessage Post(FAQ faq)
         {

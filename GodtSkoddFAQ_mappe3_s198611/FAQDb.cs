@@ -208,6 +208,44 @@ namespace GodtSkoddFAQ_mappe3_s198611
             }
         }
 
+        public List<FAQ> GetAllFAQsFromCategory(int id)
+        {
+            try
+            {
+                Categories oneDbCategory = db.Categories.Find(id);
+
+                if (oneDbCategory == null)
+                    return new List<FAQ>();
+
+                List<FAQs> allDbFAQs = db.FAQs.ToList();
+                List<FAQ> relevantFAQs = new List<FAQ>();
+
+                foreach(var oneDbFAQ in allDbFAQs)
+                {
+                    if(oneDbFAQ.CategoryId == id)
+                    {
+                        var oneFAQ = new FAQ()
+                        {
+                            id = oneDbFAQ.ID,
+                            question = oneDbFAQ.Question,
+                            answer = oneDbFAQ.Answer,
+                            categoryId = oneDbFAQ.CategoryId
+                        };
+
+                        relevantFAQs.Add(oneFAQ);
+                    }
+                }
+                
+                return relevantFAQs;
+            }
+            catch (Exception e)
+            {
+                writeToLog(e);
+                List<FAQ> relevantFAQs = new List<FAQ>();
+                return relevantFAQs;
+            }
+        }
+
         public List<FAQ> GetFAQsFromCategory(int categoryId)
         {
             try
