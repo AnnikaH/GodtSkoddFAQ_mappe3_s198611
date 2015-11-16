@@ -250,7 +250,7 @@ App.controller("faqController", function ($scope, $http) {
         });
     }
 
-// ---------------------------- new and update ------------------------------
+// ---------------------------- new, update, delete ------------------------------
 
     // ---------- Category ------------
 
@@ -269,6 +269,8 @@ App.controller("faqController", function ($scope, $http) {
         $scope.nameCategory = "";
         // to avoid "fake" error messages for the form fields:
         $scope.formCategory.$setPristine();
+
+        location.href = '#registerCategoryHeader';
     }
 
     // goToUpdateCategory(id)
@@ -287,6 +289,8 @@ App.controller("faqController", function ($scope, $http) {
             success(function (category) {
                 $scope.idCategory = category.id;    // can get this later
                 $scope.nameCategory = category.name;
+
+                location.href = '#updateCategoryHeader';
             }).
             error(function (data, status) {
                 //console.log(status + data);
@@ -372,6 +376,8 @@ App.controller("faqController", function ($scope, $http) {
         success(function (allCategories) {
             $scope.categories = allCategories;
             $scope.loading = false;
+
+            location.href = '#registerFAQHeader';
         }).
         error(function (data, status) {
 
@@ -406,6 +412,8 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.questionFAQ = faq.question;
                 $scope.answerFAQ = faq.answer;
                 $scope.categoryIdFAQ = faq.categoryId;
+
+                location.href = '#updateFAQHeader';
             }).
             error(function (data, status) {
                 //console.log(status + data);
@@ -500,6 +508,8 @@ App.controller("faqController", function ($scope, $http) {
         $scope.answeredRequest = false;
         // to avoid "fake" error messages for the form fields:
         $scope.formRequest.$setPristine();
+
+        location.href = '#registerRequestHeader';
     }
 
     // goToUpdateRequest(id)
@@ -523,6 +533,8 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.subjectRequest = request.subject;
                 $scope.questionRequest = request.question;
                 $scope.answeredRequest = request.answered;
+
+                location.href = '#updateRequestHeader';
             }).
             error(function (data, status) {
                 //console.log(status + data);

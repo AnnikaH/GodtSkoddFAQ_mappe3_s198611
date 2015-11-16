@@ -137,12 +137,12 @@
                     <table class="table table-hover">
                         <thead>
                             <tr class="active">
-                                <th>#</th>
-                                <th>Spørsmål</th>
-                                <th>Svar</th>
-                                <th>Kategori #</th>
-                                <th>Kategorinavn</th> <!-- Get through js and place in td with id -->
-                                <th></th>
+                                <th class="col-md-1 col-sm-1">#</th>
+                                <th class="col-md-3 col-sm-3">Spørsmål</th>
+                                <th class="col-md-3 col-sm-3">Svar</th>
+                                <th class="col-md-1 col-sm-1">Kategori #</th>
+                                <th class="col-md-2 col-sm-1">Kategorinavn</th> <!-- Get through js and place in td with id -->
+                                <th class="col-md-2 col-sm-3"></th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="faq in faqs">
@@ -164,16 +164,16 @@
                     <div ng-show="faqPart">
                         <!-- Add new or change FAQ: -->
 
-                        <h2 ng-show="registerFAQHeader" class="text-center main-header">Nytt FAQ</h2>
-                        <h2 ng-show="updateFAQHeader" class="text-center main-header">Endre FAQ</h2>
+                        <h2 id="registerFAQHeader" ng-show="registerFAQHeader" class="text-center main-header">Nytt FAQ</h2>
+                        <h2 id="updateFAQHeader" ng-show="updateFAQHeader" class="text-center main-header">Endre FAQ</h2>
 
                         <!-- Show all categories (because the user has to fill in category id): -->
                         <h4 class="text-left">Kategorier</h4>
                         <table class="table table-hover">
                             <thead>
                                 <tr class="active">
-                                    <th>#</th>
-                                    <th>Navn</th>
+                                    <th class="col-md-1 col-sm-1">#</th>
+                                    <th class="col-md-11 col-sm-11">Navn</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="category in categories">
@@ -227,14 +227,14 @@
                     <table class="table table-hover">
                         <thead>
                             <tr class="active">
-                                <th>#</th>
-                                <th>Navn</th>
-                                <th>E-post</th>
-                                <th>Tema</th>
-                                <th>Spørsmål</th>
-                                <th>Tidspunkt</th>
-                                <th>Besvart</th>
-                                <th></th>
+                                <th class="col-md-1 col-sm-1">#</th>
+                                <th class="col-md-2 col-sm-1">Navn</th>
+                                <th class="col-md-1 col-sm-1">E-post</th>
+                                <th class="col-md-1 col-sm-1">Tema</th>
+                                <th class="col-md-2 col-sm-2">Spørsmål</th>
+                                <th class="col-md-2 col-sm-2">Tidspunkt</th>
+                                <th class="col-md-1 col-sm-1">Besvart</th>
+                                <th class="col-md-2 col-sm-3"></th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="request in requests">
@@ -260,8 +260,8 @@
                     <div ng-show="requestPart">
                         <!-- Add new or change request: -->
 
-                        <h2 ng-show="registerRequestHeader" class="text-center main-header">Ny forespørsel</h2>
-                        <h2 ng-show="updateRequestHeader" class="text-center main-header">Endre forespørsel</h2>
+                        <h2 id="registerRequestHeader" ng-show="registerRequestHeader" class="text-center main-header">Ny forespørsel</h2>
+                        <h2 id="updateRequestHeader" ng-show="updateRequestHeader" class="text-center main-header">Endre forespørsel</h2>
 
                         <form name="formRequest">
                             <div class="form-group">
@@ -316,9 +316,9 @@
                     <table class="table table-hover">
                         <thead>
                             <tr class="active">
-                                <th>#</th>
-                                <th>Navn</th>
-                                <th></th>
+                                <th class="col-md-1 col-sm-1">#</th>
+                                <th class="col-md-9 col-sm-8">Navn</th>
+                                <th class="col-md-2 col-sm-3"></th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="category in categories">
@@ -337,8 +337,8 @@
                     <div ng-show="categoryPart">
                         <!-- Add new or change category: -->
 
-                        <h2 ng-show="registerCategoryHeader" class="text-center main-header">Ny kategori</h2>
-                        <h2 ng-show="updateCategoryHeader" class="text-center main-header">Endre kategori</h2>
+                        <h2 id="registerCategoryHeader" ng-show="registerCategoryHeader" class="text-center main-header">Ny kategori</h2>
+                        <h2 id="updateCategoryHeader" ng-show="updateCategoryHeader" class="text-center main-header">Endre kategori</h2>
 
                         <form name="formCategory">
                             <div class="form-group">
