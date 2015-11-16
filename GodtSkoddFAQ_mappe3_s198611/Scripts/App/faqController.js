@@ -148,11 +148,6 @@ App.controller("faqController", function ($scope, $http) {
           });
     }
 
-    /* cancelRequestCustomer()
-    $scope.cancelRequestCustomer = function () {
-        $scope.goToStartPage();
-    }*/
-
     // goToAllFAQs()
     $scope.goToAllFAQs = function () {
         $scope.faqPage = false;
@@ -165,13 +160,47 @@ App.controller("faqController", function ($scope, $http) {
 
         // get all FAQs
         $http.get(urlFAQ).
-        success(function (allFAQs) {
-            $scope.faqs = allFAQs;
-            $scope.loading = false;
-        }).
-        error(function (data, status) {
+            success(function (allFAQs) {
+                $scope.faqs = allFAQs;
+                
+                // get all categories so can insert the right category name when we have the ids:
+                $http.get(urlCategory).
+                    success(function (allCategories) {
+                        
+                        // double for-loop on the data already collected instead of many calls to the server:
+                        angular.forEach(allFAQs, function (faq) {
+                            var catId = faq.categoryId;
 
-        });
+                            angular.forEach(allCategories, function (category) {
+                                if(catId == category.id)
+                                {
+                                    $('#faqCategory-' + catId).html(category.name);
+                                }
+                            });
+                        });
+
+                        $scope.loading = false;
+                    }).
+                    error(function (data, status) {
+
+                    });
+
+                /* code if many calls to server instead of the double-for-loop above:
+                // get the category name by categoryId and insert into the tds with ids: 'faqCategory-' + faq.categoryId:
+                angular.forEach(allFAQs, function (item) {
+                    $http.get(urlCategory + "/" + item.categoryId).
+                        success(function (category) {
+                            $('#faqCategory-' + item.categoryId).html(category.name);
+                            $scope.loading = false;
+                        }).
+                        error(function (data, status) {
+
+                        });
+                });*/
+            }).
+            error(function (data, status) {
+
+            });
     }
 
     // goToAllRequests()
