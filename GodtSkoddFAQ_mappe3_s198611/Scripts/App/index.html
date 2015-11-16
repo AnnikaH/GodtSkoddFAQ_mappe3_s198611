@@ -70,7 +70,9 @@
                     <table class="table table-hover">
                         <tbody ng-repeat="faq in faqs">
                             <tr>
-                                <td ng-click="toggleAnswer(faq.id)" class="info">{{faq.question}}</td>
+                                <td ng-click="toggleAnswer(faq.id)" class="info">
+                                    <span id="{{'faqSpan-' + faq.id}}" class="glyphicon glyphicon-menu-down"></span> {{faq.question}}
+                                </td>
                             </tr>
                             <tr>
                                 <td id="{{'faq-' + faq.id}}" hidden>{{faq.answer}}</td>

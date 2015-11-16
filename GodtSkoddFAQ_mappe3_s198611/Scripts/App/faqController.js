@@ -85,6 +85,14 @@ App.controller("faqController", function ($scope, $http) {
     // toggle FAQ - toggleAnswer(id)
     $scope.toggleAnswer = function (id) {
         $('#faq-' + id).toggle();
+
+        $('#faqSpan-' + id).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+
+        /*$('#faqSpan-' + id).removeClass("glyphicon-menu-down");
+        $('#faqSpan-' + id).addClass("glyphicon-menu-up");
+
+        $('#faqSpan-' + id).removeClass("glyphicon-menu-up");
+        $('#faqSpan-' + id).addClass("glyphicon-menu-down");*/
     }
 
     // goToStartPage()
