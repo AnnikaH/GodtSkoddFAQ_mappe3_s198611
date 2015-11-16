@@ -107,11 +107,51 @@ App.controller("faqController", function ($scope, $http) {
         $scope.allRequestsPage = false;
         $scope.allCategoriesPage = false;
 
-        $scope.loading = true;
+        $scope.loading = false;
         $scope.sendRequestPage = true;
 
-        //$scope.skjema.$setPristine(); her?
+        $scope.customerMessage = false; // to show the form and not the ok-message for sending the request
+
+        // empty form (formCustomer) if filled:
+        $scope.senderFirstNameCustomer = "";
+        $scope.senderLastNameCustomer = "";
+        $scope.senderEmailCustomer = "";
+        $scope.subjectCustomer = "";
+        $scope.questionCustomer = "";
+        // to avoid "fake" error messages for the form fields:
+        $scope.formCustomer.$setPristine();
     }
+
+    // registerRequestCustomer()
+    $scope.registerRequestCustomer = function () {
+        // in formCustomer
+
+        var request = {
+            senderFirstName: $scope.senderFirstNameCustomer,
+            senderLastName: $scope.senderLastNameCustomer,
+            senderEmail: $scope.senderEmailCustomer,
+            subject: $scope.subjectCustomer,
+            question: $scope.questionCustomer,
+            date: new Date(),   // now
+            answered: false
+        };
+
+        $http.post(urlRequest, request).
+          success(function (data) {
+              $scope.customerMessage = true;
+          }).
+          error(function (data, status) {
+
+              // legge inn feilmelding her (som i FAQ-skjemaet hvor man fyller inn kategori id)?
+
+              //console.log(status + data);
+          });
+    }
+
+    /* cancelRequestCustomer()
+    $scope.cancelRequestCustomer = function () {
+        $scope.goToStartPage();
+    }*/
 
     // goToAllFAQs()
     $scope.goToAllFAQs = function () {
@@ -154,12 +194,6 @@ App.controller("faqController", function ($scope, $http) {
 
             $scope.requests = allRequests;
             $scope.loading = false;
-
-            /*angular.forEach($scope.requests, function (item) {
-                var dateFromDb = item.date;
-                alert(dateFromDb.toString());
-                item.date = new Date();
-            })*/
         }).
         error(function (data, status) {
 
