@@ -257,6 +257,9 @@ App.controller("faqController", function ($scope, $http) {
         $scope.updateFAQButton = false;
         $scope.cancelFAQButton = true;
 
+        // hide errormessage if is shown:
+        $('#errorMessageFAQDiv').addClass("hidden");
+
         // get all categories (so the user can see what category ID to fill in)
         $http.get(urlCategory).
         success(function (allCategories) {
@@ -285,6 +288,9 @@ App.controller("faqController", function ($scope, $http) {
         $scope.registerFAQButton = false;
         $scope.updateFAQButton = true;
         $scope.cancelFAQButton = true;
+
+        // hide errormessage if is shown:
+        $('#errorMessageFAQDiv').addClass("hidden");
 
         // get the FAQ from the database and fill in the form (formFAQ)
         $http.get(urlFAQ + "/" + id).
@@ -328,6 +334,8 @@ App.controller("faqController", function ($scope, $http) {
             }).
             error(function (data, status) {
                 //console.log(status + data);
+                $('#errorMessageFAQ').html("Noe gikk galt. Finnes det en kategori med id " + $scope.categoryIdFAQ + "?");
+                $('#errorMessageFAQDiv').removeClass("hidden");
             });
     }
 
@@ -353,6 +361,8 @@ App.controller("faqController", function ($scope, $http) {
           }).
           error(function (data, status) {
               //console.log(status + data);
+              $('#errorMessageFAQ').html("Noe gikk galt. Finnes det en kategori med id " + $scope.categoryIdFAQ + "?");
+              $('#errorMessageFAQDiv').removeClass("hidden");
           });
     }
 

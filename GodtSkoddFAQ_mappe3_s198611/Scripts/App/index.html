@@ -156,6 +156,9 @@
                                 <input class="form-control" name="categoryIdFAQ" ng-model="categoryIdFAQ" ng-required="true" ng-pattern="/^[0-9]{1,2}$/" />
                                 <p class="label label-info" ng-show="formFAQ.categoryIdFAQ.$invalid && formFAQ.categoryIdFAQ.$dirty">Skriv inn en lovlig kategori ID</p>
                             </div>
+                            <div id="errorMessageFAQDiv" class="form-group hidden">
+                                <div id="errorMessageFAQ" class="text-danger"></div>
+                            </div>
                             <div class="form-group">
                                 <button class="btn btn-success" ng-click="updateFAQ()" ng-disabled="formFAQ.$invalid" ng-show="updateFAQButton">Endre</button>
                                 <button class="btn btn-primary" ng-click="registerFAQ()" ng-disabled="formFAQ.$invalid" ng-show="registerFAQButton">Registrer</button>
