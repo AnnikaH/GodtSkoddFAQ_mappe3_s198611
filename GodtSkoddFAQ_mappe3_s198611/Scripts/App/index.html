@@ -141,7 +141,7 @@
                                 <th>Spørsmål</th>
                                 <th>Svar</th>
                                 <th>Kategori #</th>
-                                <th>Kategorinavn</th> <!-- Hente inn i js og plassere i td med id -->
+                                <th>Kategorinavn</th> <!-- Get through js and place in td with id -->
                                 <th></th>
                             </tr>
                         </thead>
@@ -151,7 +151,7 @@
                                 <td>{{faq.question}}</td>
                                 <td>{{faq.answer}}</td>
                                 <td>{{faq.categoryId}}</td>
-                                <td id="{{'faqCategory-' + faq.categoryId}}"></td> <!-- Fylle inn via js -->
+                                <td id="{{'faqCategory-' + faq.categoryId}}"></td> <!-- Fill in through js -->
                                 <td>
                                     <button class="btn btn-success" ng-click="goToUpdateFAQ(faq.id)">Endre</button>
                                     <button class="btn btn-danger" ng-click="deleteFAQ(faq.id)">Slett</button>
