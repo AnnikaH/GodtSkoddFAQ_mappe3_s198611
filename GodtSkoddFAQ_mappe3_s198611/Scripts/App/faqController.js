@@ -61,7 +61,7 @@ App.controller("faqController", function ($scope, $http) {
     $scope.filterFAQFromCategory = function (id) {
         // also possible to get all FAQs and just pick all with categoryId equal to id here in js
 
-        //$scope.loading = true;
+        // $scope.loading = true;
 
         // first "clear/unmark" all categories in case one has been selected before:
         angular.forEach($scope.categories, function (item) {
@@ -85,14 +85,7 @@ App.controller("faqController", function ($scope, $http) {
     // toggle FAQ - toggleAnswer(id)
     $scope.toggleAnswer = function (id) {
         $('#faq-' + id).toggle();
-
-        $('#faqSpan-' + id).toggleClass('glyphicon-menu-down glyphicon-menu-up');
-
-        /*$('#faqSpan-' + id).removeClass("glyphicon-menu-down");
-        $('#faqSpan-' + id).addClass("glyphicon-menu-up");
-
-        $('#faqSpan-' + id).removeClass("glyphicon-menu-up");
-        $('#faqSpan-' + id).addClass("glyphicon-menu-down");*/
+        $('#faqSpan-' + id).toggleClass('glyphicon-menu-down glyphicon-menu-up');   // toggle between these two classes
     }
 
     // goToStartPage()
@@ -270,7 +263,7 @@ App.controller("faqController", function ($scope, $http) {
         // to avoid "fake" error messages for the form fields:
         $scope.formCategory.$setPristine();
 
-        location.href = '#registerCategoryHeader';
+        location.href = '#categoryPart';
     }
 
     // goToUpdateCategory(id)
@@ -290,7 +283,7 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.idCategory = category.id;    // can get this later
                 $scope.nameCategory = category.name;
 
-                location.href = '#updateCategoryHeader';
+                location.href = '#categoryPart';
             }).
             error(function (data, status) {
                 //console.log(status + data);
@@ -377,7 +370,7 @@ App.controller("faqController", function ($scope, $http) {
             $scope.categories = allCategories;
             $scope.loading = false;
 
-            location.href = '#registerFAQHeader';
+            location.href = '#faqPart';
         }).
         error(function (data, status) {
 
@@ -406,14 +399,14 @@ App.controller("faqController", function ($scope, $http) {
         $('#errorMessageFAQDiv').addClass("hidden");
 
         // get the FAQ from the database and fill in the form (formFAQ)
-        $http.get(urlFAQ + "/" + id).
+        $http.get(urlFAQ + "/Get/" + id).   // /Get/ because it also exists another Get-method that takes an id: GetByCategory
             success(function (faq) {
                 $scope.idFAQ = faq.id;    // can get this later
                 $scope.questionFAQ = faq.question;
                 $scope.answerFAQ = faq.answer;
                 $scope.categoryIdFAQ = faq.categoryId;
 
-                location.href = '#updateFAQHeader';
+                location.href = '#faqPart';
             }).
             error(function (data, status) {
                 //console.log(status + data);
@@ -509,7 +502,7 @@ App.controller("faqController", function ($scope, $http) {
         // to avoid "fake" error messages for the form fields:
         $scope.formRequest.$setPristine();
 
-        location.href = '#registerRequestHeader';
+        location.href = '#requestPart';
     }
 
     // goToUpdateRequest(id)
@@ -534,7 +527,7 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.questionRequest = request.question;
                 $scope.answeredRequest = request.answered;
 
-                location.href = '#updateRequestHeader';
+                location.href = '#requestPart';
             }).
             error(function (data, status) {
                 //console.log(status + data);
