@@ -211,11 +211,11 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                     });
 
                 /* code if many calls to server instead of the double-for-loop above:
-                // get the category name by categoryId and insert into the tds with ids: 'faqCategory-' + faq.categoryId:
+                // get the category name by categoryId and insert into the tds with ids: 'faqCategory-' + faq.id:
                 angular.forEach(allFAQs, function (item) {
                     $http.get(urlCategory + "/" + item.categoryId).
                         success(function (category) {
-                            $('#faqCategory-' + item.categoryId).html(category.name);
+                            $('#faqCategory-' + item.id).html(category.name);
                             $scope.loading = false;
                         }).
                         error(function (data, status) {
