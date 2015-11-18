@@ -117,8 +117,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         // in formCustomer
 
         var datetime = new Date();  // now
-        datetime.setHours(datetime.getHours() + 1);   // when I just call new Date() the time is 1 hour wrong
-
+        
         var request = {
             senderFirstName: $scope.senderFirstNameCustomer,
             senderLastName: $scope.senderLastNameCustomer,
@@ -294,6 +293,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.subjectRequest = request.subject;
                 $scope.questionRequest = request.question;
                 $scope.answeredRequest = request.answered;
+                //$scope.updateDateRequest = request.date;  // can get this later
 
                 // scroll down to #requestPart:
                 $location.hash('requestPart');
@@ -320,8 +320,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         // in formRequest
 
         var datetime = new Date();  // now
-        datetime.setHours(datetime.getHours + 1);   // when I just call new Date() the time is 1 hour wrong
-
+        
         // create request
         var request = {
             senderFirstName: $scope.senderFirstNameRequest,
@@ -339,7 +338,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.requestPart = false;
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -348,8 +347,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         // in formRequest
 
         var datetime = new Date();  // now
-        datetime.setHours(datetime.getHours + 1);   // when I just call new Date() the time is 1 hour wrong
-
+        
         var request = {
             senderFirstName: $scope.senderFirstNameRequest,
             senderLastName: $scope.senderLastNameRequest,
