@@ -1,6 +1,6 @@
 ﻿var App = angular.module("App", []);
 
-App.controller("faqController", function ($scope, $http) {
+App.controller("faqController", function ($scope, $http, $location, $anchorScroll) {
 
     var urlFAQ = '/api/FAQ';
     var urlRequest = '/api/Request';
@@ -116,13 +116,16 @@ App.controller("faqController", function ($scope, $http) {
     $scope.registerRequestCustomer = function () {
         // in formCustomer
 
+        var datetime = new Date();  // now
+        datetime.setHours(datetime.getHours() + 1);   // when I just call new Date() the time is 1 hour wrong
+
         var request = {
             senderFirstName: $scope.senderFirstNameCustomer,
             senderLastName: $scope.senderLastNameCustomer,
             senderEmail: $scope.senderEmailCustomer,
             subject: $scope.subjectCustomer,
             question: $scope.questionCustomer,
-            date: new Date(),   // now
+            date: datetime,
             answered: false
         };
 
@@ -131,6 +134,7 @@ App.controller("faqController", function ($scope, $http) {
               $scope.customerMessage = true;
           }).
           error(function (data, status) {
+              //$('#sendRequestErrorMessage').html("Noe gikk galt.");
 
               // legge inn feilmelding her (som i FAQ-skjemaet hvor man fyller inn kategori id)?
 
@@ -264,7 +268,9 @@ App.controller("faqController", function ($scope, $http) {
         // to avoid "fake" error messages for the form fields:
         $scope.formRequest.$setPristine();
 
-        location.href = '#requestPart';
+        // scroll down to #requestPart:
+        $location.hash('requestPart');
+        $anchorScroll();
     }
 
     // goToUpdateRequest(id)
@@ -289,7 +295,9 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.questionRequest = request.question;
                 $scope.answeredRequest = request.answered;
 
-                location.href = '#requestPart';
+                // scroll down to #requestPart:
+                $location.hash('requestPart');
+                $anchorScroll();
             }).
             error(function (data, status) {
                 //console.log(status + data);
@@ -311,6 +319,9 @@ App.controller("faqController", function ($scope, $http) {
     $scope.updateRequest = function () {
         // in formRequest
 
+        var datetime = new Date();  // now
+        datetime.setHours(datetime.getHours + 1);   // when I just call new Date() the time is 1 hour wrong
+
         // create request
         var request = {
             senderFirstName: $scope.senderFirstNameRequest,
@@ -318,7 +329,7 @@ App.controller("faqController", function ($scope, $http) {
             senderEmail: $scope.senderEmailRequest,
             subject: $scope.subjectRequest,
             question: $scope.questionRequest,
-            date: new Date(), // now
+            date: datetime,
             answered: $scope.answeredRequest
         };
 
@@ -336,13 +347,16 @@ App.controller("faqController", function ($scope, $http) {
     $scope.registerRequest = function () {
         // in formRequest
 
+        var datetime = new Date();  // now
+        datetime.setHours(datetime.getHours + 1);   // when I just call new Date() the time is 1 hour wrong
+
         var request = {
             senderFirstName: $scope.senderFirstNameRequest,
             senderLastName: $scope.senderLastNameRequest,
             senderEmail: $scope.senderEmailRequest,
             subject: $scope.subjectRequest,
             question: $scope.questionRequest,
-            date: new Date(),   // now
+            date: datetime,
             answered: $scope.answeredRequest
         };
 
@@ -350,11 +364,6 @@ App.controller("faqController", function ($scope, $http) {
           success(function (data) {
               $scope.goToAllRequests();
               $scope.requestPart = false;
-
-              //$scope.visKunder = true;
-              //$scope.visSkjema = false;
-              //$scope.regKnapp = true;
-              //console.log("Lagre kunder OK!")
           }).
           error(function (data, status) {
               //console.log(status + data);
@@ -388,7 +397,9 @@ App.controller("faqController", function ($scope, $http) {
             $scope.categories = allCategories;
             $scope.loading = false;
 
-            location.href = '#faqPart';
+            // scroll down to #faqPart:
+            $location.hash('faqPart');
+            $anchorScroll();
         }).
         error(function (data, status) {
 
@@ -424,7 +435,9 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.answerFAQ = faq.answer;
                 $scope.categoryIdFAQ = faq.categoryId;
 
-                location.href = '#faqPart';
+                // scroll down to #faqPart:
+                $location.hash('faqPart');
+                $anchorScroll();
             }).
             error(function (data, status) {
                 //console.log(status + data);
@@ -515,7 +528,9 @@ App.controller("faqController", function ($scope, $http) {
         // to avoid "fake" error messages for the form fields:
         $scope.formCategory.$setPristine();
 
-        location.href = '#categoryPart';
+        // scroll down to #categoryPart:
+        $location.hash('categoryPart');
+        $anchorScroll();
     }
 
     // goToUpdateCategory(id)
@@ -535,7 +550,9 @@ App.controller("faqController", function ($scope, $http) {
                 $scope.idCategory = category.id;    // can get this later
                 $scope.nameCategory = category.name;
 
-                location.href = '#categoryPart';
+                // scroll down to #categoryPart:
+                $location.hash('categoryPart');
+                $anchorScroll();
             }).
             error(function (data, status) {
                 //console.log(status + data);
