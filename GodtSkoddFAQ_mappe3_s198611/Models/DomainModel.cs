@@ -8,71 +8,59 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
 {
     public class Category
     {
-        //[Display(Name = "Id")]
         public int id { get; set; }
 
-        /*[Display(Name = "Navn")]
-        [Required(ErrorMessage = "Navn på kategori må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Navn på kategori kan bare inneholde bokstaver fra A-Å")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String name { get; set; }
     }
 
     public class FAQ
     {
-        //[Display(Name = "Id")]
         public int id { get; set; }
 
-        /*[Display(Name = "Spørsmål")]
-        [Required(ErrorMessage = "Spørsmål må oppgis")]
-        [RegularExpression(@"[a-zøæåA-ZØÆÅ. \-]{2,40}", ErrorMessage = "Spørsmålet inneholder ugyldige tegn")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String question { get; set; }
 
-        /*[Display(Name = "Svar")]
-        [Required(ErrorMessage = "Svar må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s0-9\-\.]{2,80}", ErrorMessage = "Svaret inneholder ugyldige tegn")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String answer { get; set; }
 
-        /*[Display(Name = "Kategori Id")]
-        [Required(ErrorMessage = "Kategori Id må oppgis")]
-        [RegularExpression(@"[0-9]{1,2}", ErrorMessage = "Kategori Id må være et tall")]*/
+        [Required]
+        [RegularExpression("^[0-9]{1,3}$")]
         public int categoryId { get; set; }
     }
 
-    public class Request    // Senders and Messages
+    public class Request    // Sender and Message
     {
-        //[Display(Name = "Id")]
         public int id { get; set; }
 
-        /*[Display(Name = "Fornavn")]
-        [Required(ErrorMessage = "Fornavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Fornavn kan bare inneholde bokstaver fra A-Å")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String senderFirstName { get; set; }
 
-        /*[Display(Name = "Etternavn")]
-        [Required(ErrorMessage = "Etternavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Etternavn kan bare inneholde bokstaver fra A-Å")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String senderLastName { get; set; }
 
-        /*[Display(Name = "E-post")]
-        [Required(ErrorMessage = "E-post må oppgis")]
-        [RegularExpression(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$", ErrorMessage = "E-post")]*/
-        // Siste regex: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String senderEmail { get; set; }
 
-        /*[Display(Name = "Tema")]
-        [Required(ErrorMessage = "Tema må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Tema kan bare inneholde bokstaver fra A-Å")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String subject { get; set; }
 
-        /*[Display(Name = "Spørsmål")]
-        [Required(ErrorMessage = "Spørsmål må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s0-9\-\.]{1,80}", ErrorMessage = "Spørsmålet inneholder ugyldige tegn")]*/
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public String question { get; set; }
 
-        //[Display(Name = "Tidspunkt")]
+        [Required]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public DateTime date { get; set; }
 
-        //[Display(Name = "Besvart")]
+        [Required]
         public bool answered { get; set; }
     }
 }
