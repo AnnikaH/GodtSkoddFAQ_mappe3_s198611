@@ -126,96 +126,6 @@
                     </div>
                 </div>
 
-<!-- All FAQs page -->
-                <div ng-show="allFaqsPage">
-                    <h2 class="text-center main-header">FAQ</h2>
-                 
-                    <div>
-                        <button class="btn btn-primary pull-right add-button" ng-click="goToNewFaq()"><span class="glyphicon glyphicon-plus"></span> Nytt FAQ</button>
-                    </div>
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr class="active">
-                                <th class="col-md-1 col-sm-1">#</th>
-                                <th class="col-md-3 col-sm-3">Spørsmål</th>
-                                <th class="col-md-3 col-sm-3">Svar</th>
-                                <th class="col-md-1 col-sm-1">Kategori #</th>
-                                <th class="col-md-2 col-sm-1">Kategorinavn</th> <!-- Get through js and place in td with id -->
-                                <th class="col-md-2 col-sm-3"></th>
-                            </tr>
-                        </thead>
-                        <tbody ng-repeat="faq in faqs">
-                            <tr>
-                                <td>{{faq.id}}</td>
-                                <td>{{faq.question}}</td>
-                                <td>{{faq.answer}}</td>
-                                <td>{{faq.categoryId}}</td>
-                                <td id="{{'faqCategory-' + faq.categoryId}}"></td> <!-- Fill in through js -->
-                                <td>
-                                    <button class="btn btn-success" ng-click="goToUpdateFAQ(faq.id)">Endre</button>
-                                    <button class="btn btn-danger" ng-click="deleteFAQ(faq.id)">Slett</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-    <!-- FAQ part -->
-                    <div id="faqPart" ng-show="faqPart">
-                        <!-- Add new or change FAQ: -->
-
-                        <h2 ng-show="registerFAQHeader" class="text-center main-header">Nytt FAQ</h2>
-                        <h2 ng-show="updateFAQHeader" class="text-center main-header">Endre FAQ</h2>
-
-                        <!-- Show all categories (because the user has to fill in category id): -->
-                        <h4 class="text-left">Kategorier</h4>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr class="active">
-                                    <th class="col-md-1 col-sm-1">#</th>
-                                    <th class="col-md-11 col-sm-11">Navn</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="category in categories">
-                                <tr>
-                                    <td>{{category.id}}</td>
-                                    <td>{{category.name}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h4 ng-show="registerFAQHeader" class="text-left">Nytt FAQ</h4>
-                        <h4 ng-show="updateFAQHeader" class="text-left">Endre FAQ</h4>
-
-                        <form name="formFAQ">
-                            <div class="form-group">
-                                <label>Spørsmål:</label>
-                                <input class="form-control" name="questionFAQ" ng-model="questionFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9\?. \-]{2,40}$/" />
-                                <p class="label label-info" ng-show="formFAQ.questionFAQ.$invalid && formFAQ.questionFAQ.$dirty">Skriv inn et lovlig spørsmål</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Svar</label>
-                                <input class="form-control" name="answerFAQ" ng-model="answerFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ.0-9. \-]{2,80}$/" />
-                                <p class="label label-info" ng-show="formFAQ.answerFAQ.$invalid && formFAQ.answerFAQ.$dirty">Skriv inn et lovlig svar</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Kategori #:</label>
-                                <input class="form-control" name="categoryIdFAQ" ng-model="categoryIdFAQ" ng-required="true" ng-pattern="/^[0-9]{1,2}$/" />
-                                <p class="label label-info" ng-show="formFAQ.categoryIdFAQ.$invalid && formFAQ.categoryIdFAQ.$dirty">Skriv inn en lovlig kategori ID</p>
-                            </div>
-                            <div id="errorMessageFAQDiv" class="form-group hidden">
-                                <div id="errorMessageFAQ" class="text-danger"></div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-success" ng-click="updateFAQ()" ng-disabled="formFAQ.$invalid" ng-show="updateFAQButton">Endre</button>
-                                <button class="btn btn-primary" ng-click="registerFAQ()" ng-disabled="formFAQ.$invalid" ng-show="registerFAQButton">Registrer</button>
-                            </div>
-                        </form>
-
-                        <button class="btn btn-danger" ng-click="cancelFAQ()" ng-show="cancelFAQButton">Avbryt</button>
-                    </div>
-                </div><!-- end allFaqsPage -->
-
 <!-- All requests page -->
                 <div ng-show="allRequestsPage">
                     <h2 class="text-center main-header">Forespørsler</h2>
@@ -304,6 +214,96 @@
                     </div>
 
                 </div><!-- end allRequestsPage-->
+
+<!-- All FAQs page -->
+                <div ng-show="allFaqsPage">
+                    <h2 class="text-center main-header">FAQ</h2>
+
+                    <div>
+                        <button class="btn btn-primary pull-right add-button" ng-click="goToNewFaq()"><span class="glyphicon glyphicon-plus"></span> Nytt FAQ</button>
+                    </div>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="active">
+                                <th class="col-md-1 col-sm-1">#</th>
+                                <th class="col-md-3 col-sm-3">Spørsmål</th>
+                                <th class="col-md-3 col-sm-3">Svar</th>
+                                <th class="col-md-1 col-sm-1">Kategori #</th>
+                                <th class="col-md-2 col-sm-1">Kategorinavn</th> <!-- Get through js and place in td with id -->
+                                <th class="col-md-2 col-sm-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="faq in faqs">
+                            <tr>
+                                <td>{{faq.id}}</td>
+                                <td>{{faq.question}}</td>
+                                <td>{{faq.answer}}</td>
+                                <td>{{faq.categoryId}}</td>
+                                <td id="{{'faqCategory-' + faq.categoryId}}"></td> <!-- Fill in through js -->
+                                <td>
+                                    <button class="btn btn-success" ng-click="goToUpdateFAQ(faq.id)">Endre</button>
+                                    <button class="btn btn-danger" ng-click="deleteFAQ(faq.id)">Slett</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+    <!-- FAQ part -->
+                    <div id="faqPart" ng-show="faqPart">
+                        <!-- Add new or change FAQ: -->
+
+                        <h2 ng-show="registerFAQHeader" class="text-center main-header">Nytt FAQ</h2>
+                        <h2 ng-show="updateFAQHeader" class="text-center main-header">Endre FAQ</h2>
+
+                        <!-- Show all categories (because the user has to fill in category id): -->
+                        <h4 class="text-left">Kategorier</h4>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="active">
+                                    <th class="col-md-1 col-sm-1">#</th>
+                                    <th class="col-md-11 col-sm-11">Navn</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="category in categories">
+                                <tr>
+                                    <td>{{category.id}}</td>
+                                    <td>{{category.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 ng-show="registerFAQHeader" class="text-left">Nytt FAQ</h4>
+                        <h4 ng-show="updateFAQHeader" class="text-left">Endre FAQ</h4>
+
+                        <form name="formFAQ">
+                            <div class="form-group">
+                                <label>Spørsmål:</label>
+                                <input class="form-control" name="questionFAQ" ng-model="questionFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9\?. \-]{2,40}$/" />
+                                <p class="label label-info" ng-show="formFAQ.questionFAQ.$invalid && formFAQ.questionFAQ.$dirty">Skriv inn et lovlig spørsmål</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Svar</label>
+                                <input class="form-control" name="answerFAQ" ng-model="answerFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ.0-9. \-]{2,80}$/" />
+                                <p class="label label-info" ng-show="formFAQ.answerFAQ.$invalid && formFAQ.answerFAQ.$dirty">Skriv inn et lovlig svar</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori #:</label>
+                                <input class="form-control" name="categoryIdFAQ" ng-model="categoryIdFAQ" ng-required="true" ng-pattern="/^[0-9]{1,2}$/" />
+                                <p class="label label-info" ng-show="formFAQ.categoryIdFAQ.$invalid && formFAQ.categoryIdFAQ.$dirty">Skriv inn en lovlig kategori ID</p>
+                            </div>
+                            <div id="errorMessageFAQDiv" class="form-group hidden">
+                                <div id="errorMessageFAQ" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" ng-click="updateFAQ()" ng-disabled="formFAQ.$invalid" ng-show="updateFAQButton">Endre</button>
+                                <button class="btn btn-primary" ng-click="registerFAQ()" ng-disabled="formFAQ.$invalid" ng-show="registerFAQButton">Registrer</button>
+                            </div>
+                        </form>
+
+                        <button class="btn btn-danger" ng-click="cancelFAQ()" ng-show="cancelFAQButton">Avbryt</button>
+                    </div>
+                </div><!-- end allFaqsPage -->
 
 <!-- All categories page -->
                 <div ng-show="allCategoriesPage">

@@ -10,15 +10,13 @@ App.controller("faqController", function ($scope, $http) {
         loading
         faqPage
         sendRequestPage
-        allFaqsPage
         allRequestsPage
+        allFaqsPage
         allCategoriesPage
 
        All ng-show parts:
-        faqPart (inni allFaqsPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
-
         requestPart (inni allRequestsPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
-
+        faqPart (inni allFaqsPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
         categoryPart (inni allCategoriesPage) (endre show inni her alt etter om har trykt "legg til ny" eller "endre")
     */
 
@@ -60,7 +58,6 @@ App.controller("faqController", function ($scope, $http) {
     // filterFAQFromCategory(id)
     $scope.filterFAQFromCategory = function (id) {
         // also possible to get all FAQs and just pick all with categoryId equal to id here in js
-
         // $scope.loading = true;
 
         // first "clear/unmark" all categories in case one has been selected before:
@@ -78,7 +75,7 @@ App.controller("faqController", function ($scope, $http) {
                 $('#categoryChosen-' + id).addClass("active");  // the selected category
             }).
             error(function (data, status) {
-                //$scope.goToStartPage(); // reset (choose "Alle") if error occurs?
+                
             });
     }
 
@@ -141,6 +138,32 @@ App.controller("faqController", function ($scope, $http) {
           });
     }
 
+    // goToAllRequests()
+    $scope.goToAllRequests = function () {
+        $scope.faqPage = false;
+        $scope.sendRequestPage = false;
+        $scope.allFaqsPage = false;
+        $scope.allCategoriesPage = false;
+        
+        $scope.loading = true;
+        $scope.allRequestsPage = true;
+
+        // get all requests
+        $http.get(urlRequest).
+        success(function (allRequests) {
+            // have to run through all the objects to get the date-number (because the objects' date from backend is f.ex.: /Date(1447629982300)/
+            angular.forEach(allRequests, function (item) {
+                item.date = new Date(parseInt((item.date).substr(6)));
+            })
+
+            $scope.requests = allRequests;
+            $scope.loading = false;
+        }).
+        error(function (data, status) {
+
+        });
+    }
+
     // goToAllFAQs()
     $scope.goToAllFAQs = function () {
         $scope.faqPage = false;
@@ -155,18 +178,17 @@ App.controller("faqController", function ($scope, $http) {
         $http.get(urlFAQ).
             success(function (allFAQs) {
                 $scope.faqs = allFAQs;
-                
+
                 // get all categories so can insert the right category name when we have the ids:
                 $http.get(urlCategory).
                     success(function (allCategories) {
-                        
+
                         // double for-loop on the data already collected instead of many calls to the server (code commented out below):
                         angular.forEach(allFAQs, function (faq) {
                             var catId = faq.categoryId;
 
                             angular.forEach(allCategories, function (category) {
-                                if(catId == category.id)
-                                {
+                                if (catId == category.id) {
                                     $('#faqCategory-' + catId).html(category.name);
                                 }
                             });
@@ -196,32 +218,6 @@ App.controller("faqController", function ($scope, $http) {
             });
     }
 
-    // goToAllRequests()
-    $scope.goToAllRequests = function () {
-        $scope.faqPage = false;
-        $scope.sendRequestPage = false;
-        $scope.allFaqsPage = false;
-        $scope.allCategoriesPage = false;
-        
-        $scope.loading = true;
-        $scope.allRequestsPage = true;
-
-        // get all requests
-        $http.get(urlRequest).
-        success(function (allRequests) {
-            // have to run through all the objects to get the date-number (because the objects' date from backend is f.ex.: /Date(1447629982300)/
-            angular.forEach(allRequests, function (item) {
-                item.date = new Date(parseInt((item.date).substr(6)));
-            })
-
-            $scope.requests = allRequests;
-            $scope.loading = false;
-        }).
-        error(function (data, status) {
-
-        });
-    }
-
     // goToAllCategories()
     $scope.goToAllCategories = function () {
         $scope.faqPage = false;
@@ -245,93 +241,115 @@ App.controller("faqController", function ($scope, $http) {
 
 // ---------------------------- new, update, delete ------------------------------
 
-    // ---------- Category ------------
+    // ---------- Request ------------
 
-    // goToNewCategory()
-    $scope.goToNewCategory = function () {
-        $scope.categoryPart = true;
+    // goToNewRequest()
+    $scope.goToNewRequest = function () {
+        $scope.requestPart = true;
 
-        $scope.registerCategoryHeader = true;
-        $scope.updateCategoryHeader = false;
+        $scope.registerRequestHeader = true;
+        $scope.updateRequestHeader = false;
 
-        $scope.registerCategoryButton = true;
-        $scope.updateCategoryButton = false;
-        $scope.cancelCategoryButton = true;
+        $scope.registerRequestButton = true;
+        $scope.updateRequestButton = false;
+        $scope.cancelRequestButton = true;
 
         // empty form if filled:
-        $scope.nameCategory = "";
+        $scope.senderFirstNameRequest = "";
+        $scope.senderLastNameRequest = "";
+        $scope.senderEmailRequest = "";
+        $scope.subjectRequest = "";
+        $scope.questionRequest = "";
+        $scope.answeredRequest = false;
         // to avoid "fake" error messages for the form fields:
-        $scope.formCategory.$setPristine();
+        $scope.formRequest.$setPristine();
 
-        location.href = '#categoryPart';
+        location.href = '#requestPart';
     }
 
-    // goToUpdateCategory(id)
-    $scope.goToUpdateCategory = function (id) {
-        $scope.categoryPart = true;
+    // goToUpdateRequest(id)
+    $scope.goToUpdateRequest = function (id) {
+        $scope.requestPart = true;
 
-        $scope.registerCategoryHeader = false;
-        $scope.updateCategoryHeader = true;
+        $scope.registerRequestHeader = false;
+        $scope.updateRequestHeader = true;
 
-        $scope.registerCategoryButton = false;
-        $scope.updateCategoryButton = true;
-        $scope.cancelCategoryButton = true;
+        $scope.registerRequestButton = false;
+        $scope.updateRequestButton = true;
+        $scope.cancelRequestButton = true;
 
-        // get the category from the database and fill in the form (formCategory):        
-        $http.get(urlCategory + "/" + id).
-            success(function (category) {
-                $scope.idCategory = category.id;    // can get this later
-                $scope.nameCategory = category.name;
+        // get the request from the database and fill in the form (formRequest)
+        $http.get(urlRequest + "/" + id).
+            success(function (request) {
+                $scope.idRequest = request.id;    // can get this later
+                $scope.senderFirstNameRequest = request.senderFirstName;
+                $scope.senderLastNameRequest = request.senderLastName;
+                $scope.senderEmailRequest = request.senderEmail;
+                $scope.subjectRequest = request.subject;
+                $scope.questionRequest = request.question;
+                $scope.answeredRequest = request.answered;
 
-                location.href = '#categoryPart';
+                location.href = '#requestPart';
             }).
             error(function (data, status) {
                 //console.log(status + data);
             });
     }
 
-    // deleteCategory(id)
-    $scope.deleteCategory = function (id) {
-        $http.delete(urlCategory + "/" + id).
+    // deleteRequest(id)
+    $scope.deleteRequest = function (id) {
+        $http.delete(urlRequest + "/" + id).
             success(function (data) {
-                $scope.goToAllCategories();
+                $scope.goToAllRequests();
             }).
             error(function (data, status) {
                 //console.log(status + data);
             });
     }
 
-    // updateCategory()
-    $scope.updateCategory = function () {
-        // in formCategory
+    // updateRequest()
+    $scope.updateRequest = function () {
+        // in formRequest
 
-        // create category
-        var category = {
-            name: $scope.nameCategory
+        // create request
+        var request = {
+            senderFirstName: $scope.senderFirstNameRequest,
+            senderLastName: $scope.senderLastNameRequest,
+            senderEmail: $scope.senderEmailRequest,
+            subject: $scope.subjectRequest,
+            question: $scope.questionRequest,
+            date: new Date(), // now
+            answered: $scope.answeredRequest
         };
 
-        $http.put(urlCategory + "/" + $scope.idCategory, category).
+        $http.put(urlRequest + "/" + $scope.idRequest, request).
             success(function (data) {
-                $scope.goToAllCategories();
-                $scope.categoryPart = false;
+                $scope.goToAllRequests();
+                $scope.requestPart = false;
             }).
             error(function (data, status) {
                 //console.log(status + data);
             });
     }
 
-    // registerCategory()
-    $scope.registerCategory = function () {
-        // in formCategory
+    // registerRequest()
+    $scope.registerRequest = function () {
+        // in formRequest
 
-        var category = {
-            name: $scope.nameCategory
+        var request = {
+            senderFirstName: $scope.senderFirstNameRequest,
+            senderLastName: $scope.senderLastNameRequest,
+            senderEmail: $scope.senderEmailRequest,
+            subject: $scope.subjectRequest,
+            question: $scope.questionRequest,
+            date: new Date(),   // now
+            answered: $scope.answeredRequest
         };
 
-        $http.post(urlCategory, category).
+        $http.post(urlRequest, request).
           success(function (data) {
-              $scope.goToAllCategories();
-              $scope.categoryPart = false;
+              $scope.goToAllRequests();
+              $scope.requestPart = false;
 
               //$scope.visKunder = true;
               //$scope.visSkjema = false;
@@ -343,9 +361,9 @@ App.controller("faqController", function ($scope, $http) {
           });
     }
 
-    // cancelCategory()
-    $scope.cancelCategory = function () {
-        $scope.categoryPart = false;
+    // cancelRequest()
+    $scope.cancelRequest = function () {
+        $scope.requestPart = false;
     }
 
     // ------------- FAQ ---------------
@@ -479,115 +497,93 @@ App.controller("faqController", function ($scope, $http) {
         $scope.faqPart = false;
     }
 
-    // ---------- Request ------------
+    // ---------- Category ------------
 
-    // goToNewRequest()
-    $scope.goToNewRequest = function () {
-        $scope.requestPart = true;
+    // goToNewCategory()
+    $scope.goToNewCategory = function () {
+        $scope.categoryPart = true;
 
-        $scope.registerRequestHeader = true;
-        $scope.updateRequestHeader = false;
+        $scope.registerCategoryHeader = true;
+        $scope.updateCategoryHeader = false;
 
-        $scope.registerRequestButton = true;
-        $scope.updateRequestButton = false;
-        $scope.cancelRequestButton = true;
+        $scope.registerCategoryButton = true;
+        $scope.updateCategoryButton = false;
+        $scope.cancelCategoryButton = true;
 
         // empty form if filled:
-        $scope.senderFirstNameRequest = "";
-        $scope.senderLastNameRequest = "";
-        $scope.senderEmailRequest = "";
-        $scope.subjectRequest = "";
-        $scope.questionRequest = "";
-        $scope.answeredRequest = false;
+        $scope.nameCategory = "";
         // to avoid "fake" error messages for the form fields:
-        $scope.formRequest.$setPristine();
+        $scope.formCategory.$setPristine();
 
-        location.href = '#requestPart';
+        location.href = '#categoryPart';
     }
 
-    // goToUpdateRequest(id)
-    $scope.goToUpdateRequest = function (id) {
-        $scope.requestPart = true;
+    // goToUpdateCategory(id)
+    $scope.goToUpdateCategory = function (id) {
+        $scope.categoryPart = true;
 
-        $scope.registerRequestHeader = false;
-        $scope.updateRequestHeader = true;
+        $scope.registerCategoryHeader = false;
+        $scope.updateCategoryHeader = true;
 
-        $scope.registerRequestButton = false;
-        $scope.updateRequestButton = true;
-        $scope.cancelRequestButton = true;
+        $scope.registerCategoryButton = false;
+        $scope.updateCategoryButton = true;
+        $scope.cancelCategoryButton = true;
 
-        // get the request from the database and fill in the form (formRequest)
-        $http.get(urlRequest + "/" + id).
-            success(function (request) {
-                $scope.idRequest = request.id;    // can get this later
-                $scope.senderFirstNameRequest = request.senderFirstName;
-                $scope.senderLastNameRequest = request.senderLastName;
-                $scope.senderEmailRequest = request.senderEmail;
-                $scope.subjectRequest = request.subject;
-                $scope.questionRequest = request.question;
-                $scope.answeredRequest = request.answered;
+        // get the category from the database and fill in the form (formCategory):        
+        $http.get(urlCategory + "/" + id).
+            success(function (category) {
+                $scope.idCategory = category.id;    // can get this later
+                $scope.nameCategory = category.name;
 
-                location.href = '#requestPart';
+                location.href = '#categoryPart';
             }).
             error(function (data, status) {
                 //console.log(status + data);
             });
     }
 
-    // deleteRequest(id)
-    $scope.deleteRequest = function (id) {
-        $http.delete(urlRequest + "/" + id).
+    // deleteCategory(id)
+    $scope.deleteCategory = function (id) {
+        $http.delete(urlCategory + "/" + id).
             success(function (data) {
-                $scope.goToAllRequests();
+                $scope.goToAllCategories();
             }).
             error(function (data, status) {
                 //console.log(status + data);
             });
     }
 
-    // updateRequest()
-    $scope.updateRequest = function () {
-        // in formRequest
+    // updateCategory()
+    $scope.updateCategory = function () {
+        // in formCategory
 
-        // create request
-        var request = {
-            senderFirstName: $scope.senderFirstNameRequest,
-            senderLastName: $scope.senderLastNameRequest,
-            senderEmail: $scope.senderEmailRequest,
-            subject: $scope.subjectRequest,
-            question: $scope.questionRequest,
-            date: new Date(), // now
-            answered: $scope.answeredRequest
+        // create category
+        var category = {
+            name: $scope.nameCategory
         };
 
-        $http.put(urlRequest + "/" + $scope.idRequest, request).
+        $http.put(urlCategory + "/" + $scope.idCategory, category).
             success(function (data) {
-                $scope.goToAllRequests();
-                $scope.requestPart = false;
+                $scope.goToAllCategories();
+                $scope.categoryPart = false;
             }).
             error(function (data, status) {
                 //console.log(status + data);
             });
     }
 
-    // registerRequest()
-    $scope.registerRequest = function () {
-        // in formRequest
+    // registerCategory()
+    $scope.registerCategory = function () {
+        // in formCategory
 
-        var request = {
-            senderFirstName: $scope.senderFirstNameRequest,
-            senderLastName: $scope.senderLastNameRequest,
-            senderEmail: $scope.senderEmailRequest,
-            subject: $scope.subjectRequest,
-            question: $scope.questionRequest,
-            date: new Date(),   // now
-            answered: $scope.answeredRequest
+        var category = {
+            name: $scope.nameCategory
         };
 
-        $http.post(urlRequest, request).
+        $http.post(urlCategory, category).
           success(function (data) {
-              $scope.goToAllRequests();
-              $scope.requestPart = false;
+              $scope.goToAllCategories();
+              $scope.categoryPart = false;
 
               //$scope.visKunder = true;
               //$scope.visSkjema = false;
@@ -599,8 +595,8 @@ App.controller("faqController", function ($scope, $http) {
           });
     }
 
-    // cancelRequest()
-    $scope.cancelRequest = function () {
-        $scope.requestPart = false;
+    // cancelCategory()
+    $scope.cancelCategory = function () {
+        $scope.categoryPart = false;
     }
 });
