@@ -58,6 +58,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
     // filterFAQFromCategory(id)
     $scope.filterFAQFromCategory = function (id) {
         // also possible to get all FAQs and just pick all with categoryId equal to id here in js
+        
         // $scope.loading = true;
 
         // first "clear/unmark" all categories in case one has been selected before:
@@ -133,11 +134,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
               $scope.customerMessage = true;
           }).
           error(function (data, status) {
-              //$('#sendRequestErrorMessage').html("Noe gikk galt.");
+              //$('#sendRequestErrorMessage').html(data);
 
               // legge inn feilmelding her (som i FAQ-skjemaet hvor man fyller inn kategori id)?
-
-              //console.log(status + data);
           });
     }
 
@@ -293,14 +292,13 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.subjectRequest = request.subject;
                 $scope.questionRequest = request.question;
                 $scope.answeredRequest = request.answered;
-                //$scope.updateDateRequest = request.date;  // can get this later
 
                 // scroll down to #requestPart:
                 $location.hash('requestPart');
                 $anchorScroll();
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -311,7 +309,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.goToAllRequests();
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -364,7 +362,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
               $scope.requestPart = false;
           }).
           error(function (data, status) {
-              //console.log(status + data);
+              //console.log(data);
           });
     }
 
@@ -438,7 +436,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $anchorScroll();
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -449,7 +447,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.goToAllFAQs();
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -470,8 +468,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.faqPart = false;
             }).
             error(function (data, status) {
-                //console.log(status + data);
-                $('#errorMessageFAQ').html("Noe gikk galt. Finnes det en kategori med id " + $scope.categoryIdFAQ + "?");
+                $('#errorMessageFAQ').html(data + " Finnes det en kategori med id " + $scope.categoryIdFAQ + "?");
                 $('#errorMessageFAQDiv').removeClass("hidden");
             });
     }
@@ -490,15 +487,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
           success(function (data) {
               $scope.goToAllFAQs();
               $scope.faqPart = false;
-
-              //$scope.visKunder = true;
-              //$scope.visSkjema = false;
-              //$scope.regKnapp = true;
-              //console.log("Lagre kunder OK!")
           }).
           error(function (data, status) {
-              //console.log(status + data);
-              $('#errorMessageFAQ').html("Noe gikk galt. Finnes det en kategori med id " + $scope.categoryIdFAQ + "?");
+              $('#errorMessageFAQ').html(data + " Finnes det en kategori med id " + $scope.categoryIdFAQ + "?");
               $('#errorMessageFAQDiv').removeClass("hidden");
           });
     }
@@ -564,7 +555,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.goToAllCategories();
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -583,7 +574,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.categoryPart = false;
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                //console.log(data);
             });
     }
 
@@ -599,14 +590,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
           success(function (data) {
               $scope.goToAllCategories();
               $scope.categoryPart = false;
-
-              //$scope.visKunder = true;
-              //$scope.visSkjema = false;
-              //$scope.regKnapp = true;
-              //console.log("Lagre kunder OK!")
           }).
           error(function (data, status) {
-              //console.log(status + data);
+              //console.log(data);
           });
     }
 
