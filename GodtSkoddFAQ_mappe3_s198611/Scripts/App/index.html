@@ -202,7 +202,6 @@
                             <!-- Date: set now in js -->
                             <div class="checkbox">
                                 <label><input type="checkbox" name="answeredRequest" ng-model="answeredRequest" /><strong>Besvart</strong></label>
-                                <!--<p class="label label-info" ng-show="formRequest.answeredRequest.$invalid && formRequest.answeredRequest.$dirty"></p>-->
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-success" ng-click="updateRequest()" ng-disabled="formRequest.$invalid" ng-show="updateRequestButton">Endre</button>
@@ -284,7 +283,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Svar</label>
-                                <input class="form-control" name="answerFAQ" ng-model="answerFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ.0-9. \-]{2,80}$/" />
+                                <input class="form-control" name="answerFAQ" ng-model="answerFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,80}$/" />
                                 <p class="label label-info" ng-show="formFAQ.answerFAQ.$invalid && formFAQ.answerFAQ.$dirty">Skriv inn et lovlig svar</p>
                             </div>
                             <div class="form-group">

@@ -11,7 +11,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
         public int id { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9. \\-]{2,30}$")]
         public String name { get; set; }
     }
 
@@ -20,15 +20,15 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
         public int id { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9\\?. \\-]{2,40}$")]
         public String question { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9. \\-]{2,80}$")]
         public String answer { get; set; }
 
         [Required]
-        [RegularExpression("^[0-9]{1,3}$")]
+        [RegularExpression("^[0-9]{1,2}$")]
         public int categoryId { get; set; }
     }
 
@@ -46,6 +46,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
 
         [Required]
         [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
+// TODO: index.html: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/
         public String senderEmail { get; set; }
 
         [Required]
@@ -53,11 +54,10 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
         public String subject { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9\\?. \\-]{2,80}$")]
         public String question { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
         public DateTime date { get; set; }
 
         [Required]
