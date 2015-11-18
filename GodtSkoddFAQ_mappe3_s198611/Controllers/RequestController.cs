@@ -88,7 +88,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke endre forespørselen i databasen.")
+                Content = new StringContent("Kunne ikke endre forespørsel med id " + id + " i databasen.")
             };
         }
 
@@ -102,7 +102,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                 return new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Content = new StringContent("Kunne ikke slette forespørselen fra databasen.")
+                    Content = new StringContent("Kunne ikke slette forespørsel med id " + id + " fra databasen.")
                 };
             }
 

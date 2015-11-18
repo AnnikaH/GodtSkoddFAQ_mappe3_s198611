@@ -2,8 +2,8 @@
 
 App.controller("faqController", function ($scope, $http, $location, $anchorScroll) {
 
-    var urlFAQ = '/api/FAQ';
     var urlRequest = '/api/Request';
+    var urlFAQ = '/api/FAQ';
     var urlCategory = '/api/Category';
     
     /* All ng-show pages:
@@ -59,7 +59,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
     $scope.filterFAQFromCategory = function (id) {
         // also possible to get all FAQs and just pick all with categoryId equal to id here in js
         
-        // $scope.loading = true;
+        // $scope.loading = true;   // interrupting - enough to only have this when clicking the "Alle" category
 
         // first "clear/unmark" all categories in case one has been selected before:
         angular.forEach($scope.categories, function (item) {
@@ -103,6 +103,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
 
         $scope.customerMessage = false; // to show the form and not the ok-message for sending the request
 
+        // hide errormessage if is shown:
+        $('#errorMessageSendRequestDiv').addClass("hidden");
+
         // empty form (formCustomer) if filled:
         $scope.senderFirstNameCustomer = "";
         $scope.senderLastNameCustomer = "";
@@ -134,9 +137,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
               $scope.customerMessage = true;
           }).
           error(function (data, status) {
-              //$('#sendRequestErrorMessage').html(data);
-
-              // legge inn feilmelding her (som i FAQ-skjemaet hvor man fyller inn kategori id)?
+              $('#errorMessageSendRequest').html(data);
+              $('#errorMessageSendRequestDiv').removeClass("hidden");
           });
     }
 
@@ -149,6 +151,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         
         $scope.loading = true;
         $scope.allRequestsPage = true;
+
+        // hide errormessage if is shown:
+        $('#deleteMessageRequestDiv').addClass("hidden");
 
         // get all requests
         $http.get(urlRequest).
@@ -176,6 +181,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         $scope.loading = true;
         $scope.allFaqsPage = true;
 
+        // hide errormessage if is shown:
+        $('#deleteMessageFAQDiv').addClass("hidden");
+
         // get all FAQs
         $http.get(urlFAQ).
             success(function (allFAQs) {
@@ -191,7 +199,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
 
                             angular.forEach(allCategories, function (category) {
                                 if (catId == category.id) {
-                                    $('#faqCategory-' + catId).html(category.name);
+                                    $('#faqCategory-' + faq.id).html(category.name);
                                 }
                             });
                         });
@@ -230,6 +238,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         $scope.loading = true;
         $scope.allCategoriesPage = true;
 
+        // hide errormessage if is shown:
+        $('#deleteMessageCategoryDiv').addClass("hidden");
+
         // get all categories
         $http.get(urlCategory).
         success(function (allCategories) {
@@ -255,6 +266,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         $scope.registerRequestButton = true;
         $scope.updateRequestButton = false;
         $scope.cancelRequestButton = true;
+
+        // hide errormessage if is shown:
+        $('#errorMessageRequestDiv').addClass("hidden");
 
         // empty form if filled:
         $scope.senderFirstNameRequest = "";
@@ -282,6 +296,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         $scope.updateRequestButton = true;
         $scope.cancelRequestButton = true;
 
+        // hide errormessage if is shown:
+        $('#errorMessageRequestDiv').addClass("hidden");
+
         // get the request from the database and fill in the form (formRequest)
         $http.get(urlRequest + "/" + id).
             success(function (request) {
@@ -298,7 +315,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $anchorScroll();
             }).
             error(function (data, status) {
-                //console.log(data);
+                
             });
     }
 
@@ -309,7 +326,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.goToAllRequests();
             }).
             error(function (data, status) {
-                //console.log(data);
+                $('#deleteMessageRequest').html(data);
+                $('#deleteMessageRequestDiv').removeClass("hidden");
             });
     }
 
@@ -336,7 +354,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.requestPart = false;
             }).
             error(function (data, status) {
-                //console.log(data);
+                $('#errorMessageRequest').html(data);
+                $('#errorMessageRequestDiv').removeClass("hidden");
             });
     }
 
@@ -362,7 +381,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
               $scope.requestPart = false;
           }).
           error(function (data, status) {
-              //console.log(data);
+              $('#errorMessageRequest').html(data);
+              $('#errorMessageRequestDiv').removeClass("hidden");
           });
     }
 
@@ -436,7 +456,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $anchorScroll();
             }).
             error(function (data, status) {
-                //console.log(data);
+                
             });
     }
 
@@ -447,7 +467,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.goToAllFAQs();
             }).
             error(function (data, status) {
-                //console.log(data);
+                $('#deleteMessageFAQ').html(data);
+                $('#deleteMessageFAQDiv').removeClass("hidden");
             });
     }
 
@@ -512,6 +533,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         $scope.updateCategoryButton = false;
         $scope.cancelCategoryButton = true;
 
+        // hide errormessage if is shown:
+        $('#errorMessageCategoryDiv').addClass("hidden");
+
         // empty form if filled:
         $scope.nameCategory = "";
         // to avoid "fake" error messages for the form fields:
@@ -533,6 +557,9 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
         $scope.updateCategoryButton = true;
         $scope.cancelCategoryButton = true;
 
+        // hide errormessage if is shown:
+        $('#errorMessageCategoryDiv').addClass("hidden");
+
         // get the category from the database and fill in the form (formCategory):        
         $http.get(urlCategory + "/" + id).
             success(function (category) {
@@ -544,7 +571,7 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $anchorScroll();
             }).
             error(function (data, status) {
-                //console.log(status + data);
+                
             });
     }
 
@@ -555,7 +582,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.goToAllCategories();
             }).
             error(function (data, status) {
-                //console.log(data);
+                $('#deleteMessageCategory').html(data);
+                $('#deleteMessageCategoryDiv').removeClass("hidden");
             });
     }
 
@@ -574,7 +602,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
                 $scope.categoryPart = false;
             }).
             error(function (data, status) {
-                //console.log(data);
+                $('#errorMessageCategory').html(data);
+                $('#errorMessageCategoryDiv').removeClass("hidden");
             });
     }
 
@@ -592,7 +621,8 @@ App.controller("faqController", function ($scope, $http, $location, $anchorScrol
               $scope.categoryPart = false;
           }).
           error(function (data, status) {
-              //console.log(data);
+              $('#errorMessageCategory').html(data);
+              $('#errorMessageCategoryDiv').removeClass("hidden");
           });
     }
 

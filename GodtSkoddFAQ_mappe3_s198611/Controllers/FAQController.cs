@@ -103,7 +103,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke endre spørsmålet i databasen.")
+                Content = new StringContent("Kunne ikke endre spørsmål med id " + id + " i databasen.")
             };
         }
 
@@ -117,7 +117,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                 return new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Content = new StringContent("Kunne ikke slette spørsmålet fra databasen.")
+                    Content = new StringContent("Kunne ikke slette spørsmål med id " + id + " fra databasen.")
                 };
             }
 

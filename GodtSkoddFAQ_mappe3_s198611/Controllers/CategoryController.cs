@@ -88,7 +88,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke endre kategorien i databasen.")
+                Content = new StringContent("Kunne ikke endre kategori med id " + id + " i databasen.")
             };
         }
 
@@ -102,7 +102,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                 return new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Content = new StringContent("Kunne ikke slette kategorien fra databasen.")
+                    Content = new StringContent("Kunne ikke slette kategori med id " + id + " fra databasen.")
                 };
             }
 

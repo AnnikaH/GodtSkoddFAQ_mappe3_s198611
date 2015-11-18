@@ -119,6 +119,9 @@
                             </div>
                             <!-- Date: set now in js -->
                             <!-- Answered: set false in js -->
+                            <div id="errorMessageSendRequestDiv" class="form-group hidden">
+                                <div id="errorMessageSendRequest" class="text-danger"></div>
+                            </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" ng-click="registerRequestCustomer()" ng-disabled="formCustomer.$invalid">Send</button>
                             </div>
@@ -166,6 +169,10 @@
                         </tbody>
                     </table>
 
+                    <div id="deleteMessageRequestDiv" class="form-group hidden">
+                        <div id="deleteMessageRequest" class="text-danger"></div>
+                    </div>
+
     <!-- Request part -->
                     <div id="requestPart" ng-show="requestPart">
                         <!-- Add new or change request: -->
@@ -203,6 +210,9 @@
                             <div class="checkbox">
                                 <label><input type="checkbox" name="answeredRequest" ng-model="answeredRequest" /><strong>Besvart</strong></label>
                             </div>
+                            <div id="errorMessageRequestDiv" class="form-group hidden">
+                                <div id="errorMessageRequest" class="text-danger"></div>
+                            </div>
                             <div class="form-group">
                                 <button class="btn btn-success" ng-click="updateRequest()" ng-disabled="formRequest.$invalid" ng-show="updateRequestButton">Endre</button>
                                 <button class="btn btn-primary" ng-click="registerRequest()" ng-disabled="formRequest.$invalid" ng-show="registerRequestButton">Registrer</button>
@@ -239,7 +249,7 @@
                                 <td>{{faq.question}}</td>
                                 <td>{{faq.answer}}</td>
                                 <td>{{faq.categoryId}}</td>
-                                <td id="{{'faqCategory-' + faq.categoryId}}"></td> <!-- Fill in through js -->
+                                <td id="{{'faqCategory-' + faq.id}}"></td> <!-- Fill in through js -->
                                 <td>
                                     <button class="btn btn-success" ng-click="goToUpdateFAQ(faq.id)">Endre</button>
                                     <button class="btn btn-danger" ng-click="deleteFAQ(faq.id)">Slett</button>
@@ -247,6 +257,10 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <div id="deleteMessageFAQDiv" class="form-group hidden">
+                        <div id="deleteMessageFAQ" class="text-danger"></div>
+                    </div>
 
     <!-- FAQ part -->
                     <div id="faqPart" ng-show="faqPart">
@@ -332,6 +346,10 @@
                         </tbody>
                     </table>
 
+                    <div id="deleteMessageCategoryDiv" class="form-group hidden">
+                        <div id="deleteMessageCategory" class="text-danger"></div>
+                    </div>
+
     <!-- Category part -->
                     <div id="categoryPart" ng-show="categoryPart">
                         <!-- Add new or change category: -->
@@ -344,6 +362,9 @@
                                 <label>Navn:</label>
                                 <input class="form-control" name="nameCategory" ng-model="nameCategory" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,30}$/" />
                                 <p class="label label-info" ng-show="formCategory.nameCategory.$invalid && formCategory.nameCategory.$dirty">Skriv inn et lovlig kategorinavn</p>
+                            </div>
+                            <div id="errorMessageCategoryDiv" class="form-group hidden">
+                                <div id="errorMessageCategory" class="text-danger"></div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-success" ng-click="updateCategory()" ng-disabled="formCategory.$invalid" ng-show="updateCategoryButton">Endre</button>
