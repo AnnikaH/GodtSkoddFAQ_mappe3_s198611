@@ -20,11 +20,11 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
         public int id { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9\\?. \\-]{2,40}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9()\\?., \\-]{2,100}$")]
         public String question { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9. \\-]{2,80}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9()., \\-]{2,200}$")]
         public String answer { get; set; }
 
         [Required]
@@ -50,11 +50,11 @@ namespace GodtSkoddFAQ_mappe3_s198611.Models
         public String senderEmail { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ. \\-]{2,30}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ., \\-]{2,30}$")]
         public String subject { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9\\?. \\-]{2,80}$")]
+        [RegularExpression("^[a-zæøåA-ZÆØÅ0-9()\\?., \\-]{2,200}$")]
         public String question { get; set; }
         
         [Required]

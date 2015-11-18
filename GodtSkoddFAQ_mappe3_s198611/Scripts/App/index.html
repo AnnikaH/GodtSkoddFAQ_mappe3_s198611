@@ -109,12 +109,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Tema:</label>
-                                <input class="form-control" name="subjectCustomer" ng-model="subjectCustomer" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,30}$/" />
+                                <input class="form-control" name="subjectCustomer" ng-model="subjectCustomer" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9., \-]{2,30}$/" />
                                 <p class="label label-info" ng-show="formCustomer.subjectCustomer.$invalid && formCustomer.subjectCustomer.$dirty">Skriv inn et lovlig tema</p>
                             </div>
                             <div class="form-group">
                                 <label>Spørsmål:</label>
-                                <input class="form-control" name="questionCustomer" ng-model="questionCustomer" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9\?. \-]{2,80}$/" />
+                                <input class="form-control" name="questionCustomer" ng-model="questionCustomer" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9()\?., \-]{2,200}$/" />
                                 <p class="label label-info" ng-show="formCustomer.questionCustomer.$invalid && formCustomer.questionCustomer.$dirty">Skriv inn et lovlig spørsmål</p>
                             </div>
                             <!-- Date: set now in js -->
@@ -198,12 +198,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Tema:</label>
-                                <input class="form-control" name="subjectRequest" ng-model="subjectRequest" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,30}$/" />
+                                <input class="form-control" name="subjectRequest" ng-model="subjectRequest" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9., \-]{2,30}$/" />
                                 <p class="label label-info" ng-show="formRequest.subjectRequest.$invalid && formRequest.subjectRequest.$dirty">Skriv inn et lovlig tema</p>
                             </div>
                             <div class="form-group">
                                 <label>Spørsmål:</label>
-                                <input class="form-control" name="questionRequest" ng-model="questionRequest" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9\?. \-]{2,80}$/" />
+                                <input class="form-control" name="questionRequest" ng-model="questionRequest" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9()\?., \-]{2,200}$/" />
                                 <p class="label label-info" ng-show="formRequest.questionRequest.$invalid && formRequest.questionRequest.$dirty">Skriv inn et lovlig spørsmål</p>
                             </div>
                             <!-- Date: set now in js -->
@@ -292,12 +292,12 @@
                         <form name="formFAQ">
                             <div class="form-group">
                                 <label>Spørsmål:</label>
-                                <input class="form-control" name="questionFAQ" ng-model="questionFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9\?. \-]{2,40}$/" />
+                                <input class="form-control" name="questionFAQ" ng-model="questionFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9()\?., \-]{2,100}$/" />
                                 <p class="label label-info" ng-show="formFAQ.questionFAQ.$invalid && formFAQ.questionFAQ.$dirty">Skriv inn et lovlig spørsmål</p>
                             </div>
                             <div class="form-group">
                                 <label>Svar</label>
-                                <input class="form-control" name="answerFAQ" ng-model="answerFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9. \-]{2,80}$/" />
+                                <input class="form-control" name="answerFAQ" ng-model="answerFAQ" ng-required="true" ng-pattern="/^[a-zøæåA-ZØÆÅ0-9()., \-]{2,200}$/" />
                                 <p class="label label-info" ng-show="formFAQ.answerFAQ.$invalid && formFAQ.answerFAQ.$dirty">Skriv inn et lovlig svar</p>
                             </div>
                             <div class="form-group">
