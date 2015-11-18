@@ -29,13 +29,6 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                 Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
                 StatusCode = HttpStatusCode.OK
             };
-
-            // alternativ til return-koden over - for å forklare dette bedre :
-
-            //var respons = new HttpResponseMessage();
-            //respons.Content = new StringContent(JsonString, Encoding.UTF8, "application/json");
-            //respons.StatusCode = HttpStatusCode.OK;
-            //return respons;
         }
 
         // GET api/Request/5
@@ -58,9 +51,9 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool OK = faqDb.CreateRequest(request);
+                bool ok = faqDb.CreateRequest(request);
 
-                if (OK)
+                if (ok)
                 {
                     return new HttpResponseMessage()
                     {
@@ -72,7 +65,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke sette inn denne forespørselen i databasen")
+                Content = new StringContent("Kunne ikke sette inn denne forespørselen i databasen.")
             };
         }
 
@@ -81,9 +74,9 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool OK = faqDb.UpdateRequest(id, request);
+                bool ok = faqDb.UpdateRequest(id, request);
 
-                if (OK)
+                if (ok)
                 {
                     return new HttpResponseMessage()
                     {
@@ -95,21 +88,21 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke endre forespørselen i databasen")
+                Content = new StringContent("Kunne ikke endre forespørselen i databasen.")
             };
         }
 
         // DELETE api/Request/5
         public HttpResponseMessage Delete(int id)
         {
-            bool OK = faqDb.DeleteRequest(id);
+            bool ok = faqDb.DeleteRequest(id);
 
-            if (!OK)
+            if (!ok)
             {
                 return new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Content = new StringContent("Kunne ikke slette forespørselen fra databasen")
+                    Content = new StringContent("Kunne ikke slette forespørselen fra databasen.")
                 };
             }
 

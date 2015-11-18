@@ -29,13 +29,6 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                 Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
                 StatusCode = HttpStatusCode.OK
             };
-
-            // alternativ til return-koden over - for å forklare dette bedre :
-
-            //var respons = new HttpResponseMessage();
-            //respons.Content = new StringContent(JsonString, Encoding.UTF8, "application/json");
-            //respons.StatusCode = HttpStatusCode.OK;
-            //return respons;
         }
 
         // GET api/FAQ/5
@@ -66,13 +59,6 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
                 Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
                 StatusCode = HttpStatusCode.OK
             };
-
-            // alternativ til return-koden over - for å forklare dette bedre :
-
-            //var respons = new HttpResponseMessage();
-            //respons.Content = new StringContent(JsonString, Encoding.UTF8, "application/json");
-            //respons.StatusCode = HttpStatusCode.OK;
-            //return respons;
         }
 
         // POST api/FAQ
@@ -80,9 +66,9 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool OK = faqDb.CreateFAQ(faq);
+                bool ok = faqDb.CreateFAQ(faq);
 
-                if (OK)
+                if (ok)
                 {
                     return new HttpResponseMessage()
                     {
@@ -94,7 +80,7 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke sette inn dette spørsmålet i databasen")
+                Content = new StringContent("Kunne ikke sette inn dette spørsmålet i databasen.")
             };
         }
 
@@ -103,9 +89,9 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool OK = faqDb.UpdateFAQ(id, faq);
+                bool ok = faqDb.UpdateFAQ(id, faq);
 
-                if (OK)
+                if (ok)
                 {
                     return new HttpResponseMessage()
                     {
@@ -117,21 +103,21 @@ namespace GodtSkoddFAQ_mappe3_s198611.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.NotFound,
-                Content = new StringContent("Kunne ikke endre spørsmålet i databasen")
+                Content = new StringContent("Kunne ikke endre spørsmålet i databasen.")
             };
         }
 
         // DELETE api/FAQ/5
         public HttpResponseMessage Delete(int id)
         {
-            bool OK = faqDb.DeleteFAQ(id);
+            bool ok = faqDb.DeleteFAQ(id);
 
-            if (!OK)
+            if (!ok)
             {
                 return new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Content = new StringContent("Kunne ikke slette spørsmålet fra databasen")
+                    Content = new StringContent("Kunne ikke slette spørsmålet fra databasen.")
                 };
             }
 
